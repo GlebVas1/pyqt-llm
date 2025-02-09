@@ -78,9 +78,15 @@ class mainModel(Parameters):
         self.faissRAGIndex = faiss.IndexFlatL2(d)
         self.faissRAGIndex.add(textsEmbeds)
 
-    def SaveEmbededVectorStorage(self, path : str = "./vector_db/") -> None:
+    def SaveTextAndEmbededVectorStorage(self, path : str = "./vector_db/") -> None:
+        if self.faissRAGIndex is None:
+            raise RuntimeError("No index is setted")
+        
         path += self.usedEmbeddingModel
-        self.faissRAGIndex.save
+        faiss.write_index(self.faissRAGIndex, path + "/index/index")
+        with open(path + "/text/data", "w") as file:
+            file.write(str(self.splittedTextForIndex))
+        
 
 
     def EmbedQuestion(self, question : str) -> np.array:
@@ -118,7 +124,6 @@ class mainModel(Parameters):
 
     def asdf() -> None:
         pass
-
 
         question = "Who is Valakas"
         question = "Кто такой Валакас?"
