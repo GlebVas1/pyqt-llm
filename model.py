@@ -11,12 +11,16 @@ class Parameters():
     splitChunkSize = 800
     splitChunkOverlap = 100
     embeddingGuffModel = False
-
+    llmEmbeding = None
+    llm = None
 
 class mainModel(Parameters):
 
     usedAnswerModel = None
     usedEmbeddingModel = None
+    faissRAGIndex = None
+    splittedTextForIndex = None
+    generationKwargs = None
 
     def InitializeModel(self, name : str = "1") -> None:
         pass
@@ -30,10 +34,7 @@ class mainModel(Parameters):
         )
         self.usedEmbeddingModel = path.split("/")[-1].split(".")[0]
 
-
-
-
-    def LoadAndSaveGenerationKwargs(self) -> None:
+    def LoadGenerationKwargs(self) -> None:
         self.generationKwargs = {
             "max_tokens":1000,
             "stop":["</s>"],
@@ -48,37 +49,83 @@ class mainModel(Parameters):
             n_threads=54,            # Number of CPU threads to use
             n_gpu_layers=0        # Number of model layers to offload to GPU
         )
-       
+    
+
     def SplitText(self, text, chunk_size : int, chunk_overlap : int) -> list[str]:
         splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-        return splitter.split_text(text)
+        self.splittedTextForIndex = splitter.split_text(text)
+        return self.splittedTextForIndex
 
-    def EmbedTexts(self, splittedText : list[str]) -> None:
+    def EmbedTexts(self) -> None:
+
+        if self.splittedTextForIndex is None:
+            raise RuntimeError("No splitted text is setted")
+
+        if self.llmEmbeding is None:
+            raise RuntimeError("No embedding model is setted")
+        
         textsEmbeds = []
-        for text in splittedText:
-            # Because of embed queue cometimes incorrectly parse model results in it
+
+        for text in self.splittedTextForIndex:
+            # Because of embed queue sometimes incorrectly parse model results in it
             resultArray = self.llmEmbeding.client.embed(text)
             textsEmbeds.append(resultArray)
         
         textsEmbeds = np.array(textsEmbeds)
 
         d = textsEmbeds.shape[1]
-        self.RAGIndex = faiss.IndexFlatL2(d)
-        self.RAGIndex.add(textsEmbeds)
+
+        self.faissRAGIndex = faiss.IndexFlatL2(d)
+        self.faissRAGIndex.add(textsEmbeds)
 
     def SaveEmbededVectorStorage(self, path : str = "./vector_db/") -> None:
         path += self.usedEmbeddingModel
-        self.RAGIndex.save
+        self.faissRAGIndex.save
 
 
-    def EmbedQuestion(question : str):
+    def EmbedQuestion(self, question : str) -> np.array:
+        if self.llmEmbeding is not None:
+            return np.array([self.llmEmbeding.client.embed(question)])
+        else:
+            raise RuntimeError("No embedding model is setted")
+        
+    def FindChunks(self, embededQuestion : np.array, k : int = 2) -> list[str]:
+        if self.faissRAGIndex is None:
+            raise RuntimeError("No index is setted")
+
+        if self.splittedTextForIndex is None:
+            raise RuntimeError("No texts for indexing")
+        
+        try:
+            D, I = self.faissRAGIndex.search(embededQuestion, k=k)
+            chunks = [self.splittedTextForIndex[i] for i in I.tolist()[0]]
+            return chunks
+
+        except Exception as e:
+            raise RuntimeError("Error while searching: " + str(e))
+        
+    def ComputePrompt(self, question : str) -> str:
+        embededQuestion = self.EmbedQuestion(question)
+        chunks = self.FindChunks(embededQuestion=embededQuestion)
+        result = f'''Есть следующая информация
+                    ---------------------
+                    {chunks}
+                    ---------------------
+                    Ответь на вопрос используя только информацию выше
+                    Вопрос: {question}
+                    Ответ:'''
+        return result
+
+    def asdf() -> None:
+        pass
+
 
         question = "Who is Valakas"
         question = "Кто такой Валакас?"
         question = "Типы данных, не относящиеся к ОО расширениям, но позволяющие хранить неатомарные значения?"
         question_embedding = np.array([self.llmEmbeding.client.embed(question)])
 
-        D, I = index.search(question_embedding, k=2)
+        D, I = self.search(question_embedding, k=2)
 
         retrieved_chunk = [self.splittedText[i] for i in I.tolist()[0]]
         
@@ -107,12 +154,13 @@ class mainModel(Parameters):
         print("Answer ------")
 
 
-    def mainModelComputeRequest(self, request : str) -> str:
+    def ComputeRequest(self, prompt : str) -> list[str]:
+        """Returns all the text results from llm"""
+        print(self.generationKwargs)
+        result = self.llm(prompt=prompt, **self.generationKwargs)
 
-        request = f'''Ответь на вопрос: {request} '''
-        
-        result = self.llm(prompt=request, **self.generationKwargs)
-        return result["choices"][0]["text"]
+        resultsTexts = [choice["text"] for choice in result["choices"]]
+        return resultsTexts
 
     def mainModelSetContextFile(self, path : str) -> None:
         pass
