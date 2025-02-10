@@ -40,7 +40,7 @@ class mainModel(Parameters):
             model_path=path,
             n_ctx=4000,  # Context length to use
             n_threads=54,            # Number of CPU threads to use
-            n_gpu_layers=0        # Number of model layers to offload to GPU
+            n_gpu_layers=40        # Number of model layers to offload to GPU
         )
         self.usedEmbeddingModel = path.split("/")[-1].split(".")[0]
 
@@ -52,12 +52,12 @@ class mainModel(Parameters):
             "top_k":1 # This is essentiallys greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
         }
 
-    def LoadAnswerModelFromFile(self, path : str = "./models/Llama-3.1-Tulu-3-8B-Q8_0.gguf") -> None:
+    def LoadAnswerModelFromFile(self, path : str = "./models/ggml-model-Q8_0.gguf") -> None:
         self.llm = Llama(
             model_path=path,
             n_ctx=4000,  # Context length to use
             n_threads=54,            # Number of CPU threads to use
-            n_gpu_layers=0        # Number of model layers to offload to GPU
+            n_gpu_layers=40        # Number of model layers to offload to GPU
         )
     
 

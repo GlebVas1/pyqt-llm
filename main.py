@@ -16,7 +16,7 @@ thisModel.SplitText(text, "test", 600, 100)
 thisModel.EmbedTexts()
 thisModel.SaveTextAndEmbededVectorStorage()
 
-prompt = thisModel.ComputePrompt("Перечисли все DLC с кратким описанием", extend=2)
+prompt = thisModel.ComputePrompt("О чем эта статья?", extend=1)
 print(thisModel.ComputeRequest(prompt))
 
 #print(thisModel.mainModelComputeRequest("Кто такой пушкин"))
