@@ -1,6 +1,6 @@
 .venv
 models
 __pycache__
-test.txt
-download.sh
+./test.txt
+./download.sh
 vector_db

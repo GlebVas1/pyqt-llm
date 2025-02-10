@@ -31,18 +31,24 @@ class mainModel(Parameters):
 
     generationKwargs = None
 
+    splitTextProcessFunction = None
+
+
 
     def InitializeModel(self, name : str = "1") -> None:
         pass
 
-    def LoadEmbeddingModelFromFile(self, path : str = "./models/multilingual-e5-large-instruct_q8_0.gguf") -> None:
-        self.llmEmbeding = LlamaCppEmbeddings(
-            model_path=path,
-            n_ctx=4000,  # Context length to use
-            n_threads=54,            # Number of CPU threads to use
-            n_gpu_layers=40        # Number of model layers to offload to GPU
-        )
-        self.usedEmbeddingModel = path.split("/")[-1].split(".")[0]
+    def LoadEmbeddingModelFromFile(self, path : str = "./models/multilingual-e5-large-instruct_q8_0.gguf", nCtx=4000, nThreads=54, nGPULayers=0) -> None:
+        try:
+            self.llmEmbeding = LlamaCppEmbeddings(
+                model_path=path,
+                n_ctx=nCtx,  # Context length to use
+                n_threads=nThreads,            # Number of CPU threads to use
+                n_gpu_layers=nGPULayers        # Number of model layers to offload to GPU
+            )
+            self.usedEmbeddingModel = path.split("/")[-1].split(".")[0]
+        except:
+            raise RuntimeError("Can't instantiate gguf model")
 
     def LoadGenerationKwargs(self) -> None:
         self.generationKwargs = {
@@ -52,22 +58,27 @@ class mainModel(Parameters):
             "top_k":1 # This is essentiallys greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
         }
 
-    def LoadAnswerModelFromFile(self, path : str = "./models/ggml-model-Q8_0.gguf") -> None:
-        self.llm = Llama(
-            model_path=path,
-            n_ctx=4000,  # Context length to use
-            n_threads=54,            # Number of CPU threads to use
-            n_gpu_layers=40        # Number of model layers to offload to GPU
-        )
+    def LoadAnswerModelFromFile(self, path : str = "./models/ggml-model-Q8_0.gguf", nCtx=4000, nThreads=54, nGPULayers=0) -> None:
+        try:
+            self.llm = Llama(
+                model_path=path,
+                n_ctx=nCtx,  # Context length to use
+                n_threads=nThreads,            # Number of CPU threads to use
+                n_gpu_layers=nGPULayers        # Number of model layers to offload to GPU
+            )
+        except:
+            raise RuntimeError("Can't instantiate gguf model")
     
 
     def SplitText(self, text, textDocumentName = "document", chunkSize : int = 600, chunkOverlap : int = 100) -> list[str]:
-
         splitter = RecursiveCharacterTextSplitter(chunk_size=chunkSize, chunk_overlap=chunkOverlap)
         self.splittedTextForIndex = splitter.split_text(text)
         self.textDocumentName = textDocumentName
         return self.splittedTextForIndex
 
+    def SetSplitTextsProcessFunction(self, func : function[float]):
+        self.splitTextProcessFunction = func
+    
     def EmbedTexts(self) -> None:
 
         if self.splittedTextForIndex is None:
@@ -78,14 +89,26 @@ class mainModel(Parameters):
         
         textsEmbeds = []
 
+        totalCount = len(self.splittedTextForIndex)
+        valuePerStep = 100.0 / float(totalCount)
+        currentProgress = 0.0
+
         for text in self.splittedTextForIndex:
+            
+
             # Because of embed queue sometimes incorrectly parse model results in it
+            currentProgress += valuePerStep
+            if self.splitTextProcessFunction is not None:
+                self.splitTextProcessFunction(currentProgress)
+            
             resultArray = self.llmEmbeding.client.embed(text)
             textsEmbeds.append(resultArray)
         
         textsEmbeds = np.array(textsEmbeds)
 
         d = textsEmbeds.shape[1]
+
+        self.splitTextProcessFunction(0.0)
 
         self.faissRAGIndex = faiss.IndexFlatL2(d)
         self.faissRAGIndex.add(textsEmbeds)
@@ -152,8 +175,17 @@ class mainModel(Parameters):
             raise RuntimeError("Error while searching: " + str(e))
         
     def ComputePrompt(self, question : str, k = 2, extend = 0) -> str:
-        embededQuestion = self.EmbedQuestion(question)
-        chunks = self.FindChunks(embededQuestion=embededQuestion, k=k, extend=extend)
+        try:
+            embededQuestion = self.EmbedQuestion(question)
+        except Exception as e:
+            raise RuntimeError("Error on embedding question " + str(e))
+        
+        chunks = ["None"]
+        try:
+            chunks = self.FindChunks(embededQuestion=embededQuestion, k=k, extend=extend)
+        except Exception as e: 
+            raise RuntimeError("Error on search chunks " + str(e))
+        
         result = f'''Есть следующая информация
                     ---------------------
                     {chunks}
@@ -161,6 +193,7 @@ class mainModel(Parameters):
                     Ответь на вопрос используя только информацию выше
                     Вопрос: {question}
                     Ответ:'''
+        
         return result
 
     def asdf() -> None:
@@ -202,9 +235,7 @@ class mainModel(Parameters):
 
     def ComputeRequest(self, prompt : str) -> list[str]:
         """Returns all the text results from llm"""
-        print(self.generationKwargs)
         result = self.llm(prompt=prompt, **self.generationKwargs)
-
         resultsTexts = [choice["text"] for choice in result["choices"]]
         return resultsTexts
 
