@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>resources/check-box-unchecked-pressed.png</file>
+    <file>resources/check-box-unchecked.png</file>
+    <file>resources/check-box-checked-pressed.png</file>
+    <file>resources/check-box-checked.png</file>
+    <file>resources/arrow-up.png</file>
+    <file>resources/arrow-right.png</file>
+    <file>resources/arrow-left.png</file>
+    <file>resources/arrow-down.png</file>
+  </qresource>
+</RCC>

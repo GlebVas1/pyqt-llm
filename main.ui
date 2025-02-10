@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1277</width>
-    <height>780</height>
+    <height>782</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,13 +58,44 @@ QLabel {
 Line {
 	border-width : 0px;
 	color : black;
+}
+
+
+QSpinBox {
+border-radius : 2px;
+background-color : white; 
+color : black;
+padding-left : 15px;
+padding-right : 15px;
+}
+
+QSpinBox::up-button {
+subcontrol-origin: border;
+subcontrol-position: center right; 
+border-image: url(:/icons/resources/arrow_right.png);
+border : 1px;
+right : 10px;
+width : 10px;
+}
+
+QSpinBox::up-button::pressed {
+border-image: url(:/icons/resources/arrow_right_pressed.png);
+}
+
+QSpinBox::down-button {
+subcontrol-origin: border;
+subcontrol-position: center left ;
+border-image: url(:/icons/resources/arrow-right.png);
+border : 1px;
+right : 35px;
+width : 10px;
 }</string>
   </property>
   <property name="toolButtonStyle">
-   <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
+   <enum>Qt::ToolButtonIconOnly</enum>
   </property>
   <property name="tabShape">
-   <enum>QTabWidget::TabShape::Triangular</enum>
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -103,10 +134,7 @@ Line {
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::Shape::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Shadow::Raised</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
@@ -129,10 +157,7 @@ Line {
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Shape::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
             </widget>
            </item>
@@ -151,29 +176,8 @@ Line {
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Shape::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
-             </property>
-             <widget class="QLabel" name="label">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>10</y>
-                <width>141</width>
-                <height>18</height>
-               </rect>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Answer model</string>
-              </property>
-             </widget>
              <widget class="QSpinBox" name="spinBox">
               <property name="geometry">
                <rect>
@@ -354,9 +358,6 @@ Line {
                 <height>16</height>
                </rect>
               </property>
-              <property name="frameShadow">
-               <enum>QFrame::Shadow::Plain</enum>
-              </property>
               <property name="lineWidth">
                <number>2</number>
               </property>
@@ -364,7 +365,7 @@ Line {
                <number>1</number>
               </property>
               <property name="orientation">
-               <enum>Qt::Orientation::Horizontal</enum>
+               <enum>Qt::Vertical</enum>
               </property>
              </widget>
              <widget class="QComboBox" name="comboBox">
@@ -390,6 +391,61 @@ Line {
                <string>Load</string>
               </property>
              </widget>
+             <widget class="QFrame" name="frame_15">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 3px;
+	border-bottom-left-radius : 0px;
+	border-bottom-right-radius : 0px;
+	background-color : black;
+	color : white;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>-3</y>
+                 <width>141</width>
+                 <height>41</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Answer model</string>
+               </property>
+              </widget>
+             </widget>
             </widget>
            </item>
            <item>
@@ -401,39 +457,85 @@ Line {
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Shape::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
               <property name="leftMargin">
-               <number>5</number>
+               <number>0</number>
               </property>
               <property name="topMargin">
-               <number>5</number>
+               <number>0</number>
               </property>
               <property name="rightMargin">
-               <number>5</number>
+               <number>0</number>
               </property>
               <property name="bottomMargin">
-               <number>5</number>
+               <number>0</number>
               </property>
               <property name="horizontalSpacing">
-               <number>5</number>
+               <number>0</number>
               </property>
               <property name="verticalSpacing">
                <number>3</number>
               </property>
               <item row="0" column="0">
+               <widget class="QFrame" name="frame_16">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QFrame {
+	border-radius : 3px;
+	border-bottom-left-radius : 0px;
+	border-bottom-right-radius : 0px;
+	background-color : black;
+	color : white;
+}</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <widget class="QLabel" name="label_8">
+                 <property name="geometry">
+                  <rect>
+                   <x>5</x>
+                   <y>-1</y>
+                   <width>181</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Preset</string>
+                 </property>
+                </widget>
+               </widget>
+              </item>
+              <item row="1" column="0">
                <layout class="QVBoxLayout" name="verticalLayout_5">
-                <item>
-                 <widget class="QLabel" name="label_8">
-                  <property name="text">
-                   <string>Preset</string>
-                  </property>
-                 </widget>
-                </item>
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
                 <item>
                  <widget class="QComboBox" name="comboBox_2"/>
                 </item>
@@ -447,9 +549,6 @@ Line {
            </item>
            <item>
             <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Orientation::Vertical</enum>
-             </property>
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
@@ -467,9 +566,6 @@ Line {
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
@@ -482,9 +578,6 @@ Line {
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <spacer name="verticalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
-            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
@@ -508,10 +601,7 @@ Line {
              </size>
             </property>
             <property name="frameShape">
-             <enum>QFrame::Shape::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Shadow::Raised</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_5">
              <property name="leftMargin">
@@ -550,10 +640,7 @@ Line {
              </size>
             </property>
             <property name="frameShape">
-             <enum>QFrame::Shape::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Shadow::Raised</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
              <property name="leftMargin">
@@ -588,10 +675,7 @@ Line {
                   </size>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::Shape::StyledPanel</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Shadow::Raised</enum>
+                  <enum>QFrame::NoFrame</enum>
                  </property>
                  <widget class="QPushButton" name="pushButton_8">
                   <property name="geometry">
@@ -603,7 +687,7 @@ Line {
                    </rect>
                   </property>
                   <property name="text">
-                   <string>PushButton</string>
+                   <string/>
                   </property>
                  </widget>
                  <widget class="QPushButton" name="pushButton_9">
@@ -628,9 +712,6 @@ Line {
           </item>
           <item>
            <spacer name="verticalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
-            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
@@ -643,9 +724,6 @@ Line {
         </item>
         <item>
          <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
@@ -671,10 +749,7 @@ Line {
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::Shape::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Shadow::Raised</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
@@ -697,29 +772,8 @@ Line {
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Shape::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
-             </property>
-             <widget class="QLabel" name="label_9">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>10</y>
-                <width>141</width>
-                <height>18</height>
-               </rect>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Text processing</string>
-              </property>
-             </widget>
              <widget class="QLabel" name="label_10">
               <property name="geometry">
                <rect>
@@ -792,6 +846,49 @@ Line {
                <string>Save</string>
               </property>
              </widget>
+             <widget class="QFrame" name="frame_14">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 3px;
+	border-bottom-left-radius : 0px;
+	border-bottom-right-radius : 0px;
+	background-color : black;
+	color : white;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_9">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>0</y>
+                 <width>141</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Text processing</string>
+               </property>
+              </widget>
+             </widget>
             </widget>
            </item>
            <item>
@@ -809,29 +906,8 @@ Line {
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Shape::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
-             </property>
-             <widget class="QLabel" name="label_12">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>10</y>
-                <width>171</width>
-                <height>18</height>
-               </rect>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Embedding model</string>
-              </property>
-             </widget>
              <widget class="QSpinBox" name="spinBox_8">
               <property name="geometry">
                <rect>
@@ -897,6 +973,43 @@ Line {
                 <height>31</height>
                </rect>
               </property>
+              <property name="styleSheet">
+               <string notr="true">
+QSpinBox {
+border-radius : 5px;
+background-color : rgb(69, 69, 69); 
+color : white;
+padding-left : 15px;
+padding-right : 50px;
+}
+
+QSpinBox::up-button {
+subcontrol-origin: border;
+subcontrol-position: center right; 
+border-image: url(:/icons/resources/arrow_right.png);
+border : 1px;
+right : 10px;
+width : 10px;
+}
+
+QSpinBox::up-button::pressed {
+border-image: url(:/icons/arrow_right_pressed.png);
+}
+
+QSpinBox::down-button {
+subcontrol-origin: border;
+subcontrol-position: center right ;
+border-image: url(:/icons/resources/arrow_left.png);
+border : 1px;
+right : 35px;
+width : 10px;
+}
+
+QSpinBox::down-button::pressed {
+border-image: url(:/icons/resources/arrow_left_pressed.png);
+}
+</string>
+              </property>
              </widget>
              <widget class="QLabel" name="label_15">
               <property name="geometry">
@@ -926,6 +1039,49 @@ Line {
                </rect>
               </property>
              </widget>
+             <widget class="QFrame" name="frame_13">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 3px;
+	border-bottom-left-radius : 0px;
+	border-bottom-right-radius : 0px;
+	background-color : black;
+	color : white;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_12">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>0</y>
+                 <width>171</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Embedding model</string>
+               </property>
+              </widget>
+             </widget>
             </widget>
            </item>
            <item>
@@ -943,29 +1099,8 @@ Line {
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::Shape::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
-             </property>
-             <widget class="QLabel" name="label_16">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>10</y>
-                <width>171</width>
-                <height>18</height>
-               </rect>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Vector data base</string>
-              </property>
-             </widget>
              <widget class="QPushButton" name="pushButton_4">
               <property name="geometry">
                <rect>
@@ -1087,13 +1222,53 @@ Line {
                </rect>
               </property>
              </widget>
+             <widget class="QFrame" name="frame_12">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 3px;
+	border-bottom-left-radius : 0px;
+	border-bottom-right-radius : 0px;
+	background-color : black;
+	color : white;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <widget class="QLabel" name="label_16">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>0</y>
+                 <width>171</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Vector data base</string>
+               </property>
+              </widget>
+             </widget>
             </widget>
            </item>
            <item>
             <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Orientation::Vertical</enum>
-             </property>
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
@@ -1112,6 +1287,8 @@ Line {
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="ico-res.qrc"/>
+ </resources>
  <connections/>
 </ui>
