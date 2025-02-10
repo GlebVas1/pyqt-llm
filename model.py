@@ -6,6 +6,13 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import numpy as np
 import faiss
+import os
+
+class PromptPatterns:
+    languageDict = {}
+
+    def AddPromptTemplate():
+        pass
 
 class Parameters():
     splitChunkSize = 800
@@ -20,7 +27,10 @@ class mainModel(Parameters):
     usedEmbeddingModel = None
     faissRAGIndex = None
     splittedTextForIndex = None
+    textDocumentName = None
+
     generationKwargs = None
+
 
     def InitializeModel(self, name : str = "1") -> None:
         pass
@@ -28,7 +38,7 @@ class mainModel(Parameters):
     def LoadEmbeddingModelFromFile(self, path : str = "./models/multilingual-e5-large-instruct_q8_0.gguf") -> None:
         self.llmEmbeding = LlamaCppEmbeddings(
             model_path=path,
-            n_ctx=2000,  # Context length to use
+            n_ctx=4000,  # Context length to use
             n_threads=54,            # Number of CPU threads to use
             n_gpu_layers=0        # Number of model layers to offload to GPU
         )
@@ -36,7 +46,7 @@ class mainModel(Parameters):
 
     def LoadGenerationKwargs(self) -> None:
         self.generationKwargs = {
-            "max_tokens":1000,
+            "max_tokens":2000,
             "stop":["</s>"],
             "echo":False, # Echo the prompt in the output
             "top_k":1 # This is essentiallys greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
@@ -45,15 +55,17 @@ class mainModel(Parameters):
     def LoadAnswerModelFromFile(self, path : str = "./models/Llama-3.1-Tulu-3-8B-Q8_0.gguf") -> None:
         self.llm = Llama(
             model_path=path,
-            n_ctx=2000,  # Context length to use
+            n_ctx=4000,  # Context length to use
             n_threads=54,            # Number of CPU threads to use
             n_gpu_layers=0        # Number of model layers to offload to GPU
         )
     
 
-    def SplitText(self, text, chunk_size : int, chunk_overlap : int) -> list[str]:
-        splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    def SplitText(self, text, textDocumentName = "document", chunkSize : int = 600, chunkOverlap : int = 100) -> list[str]:
+
+        splitter = RecursiveCharacterTextSplitter(chunk_size=chunkSize, chunk_overlap=chunkOverlap)
         self.splittedTextForIndex = splitter.split_text(text)
+        self.textDocumentName = textDocumentName
         return self.splittedTextForIndex
 
     def EmbedTexts(self) -> None:
@@ -82,8 +94,26 @@ class mainModel(Parameters):
         if self.faissRAGIndex is None:
             raise RuntimeError("No index is setted")
         
-        path += self.usedEmbeddingModel
-        faiss.write_index(self.faissRAGIndex, path + "/index/index")
+        path += self.textDocumentName + "_" + self.usedEmbeddingModel
+
+        try:
+            os.makedirs(path + "/index")
+        except FileExistsError:
+            print("Save directory already exists")
+        except PermissionError:
+            print("No permission to create save dir")
+
+
+        with open(path + "/index/index", "w"):
+            faiss.write_index(self.faissRAGIndex, path + "/index/index")
+
+        try:
+            os.makedirs(path + "/text")
+        except FileExistsError:
+            print("Save directory already exists")
+        except PermissionError:
+            print("No permission to create save dir")
+
         with open(path + "/text/data", "w") as file:
             file.write(str(self.splittedTextForIndex))
         
@@ -95,7 +125,7 @@ class mainModel(Parameters):
         else:
             raise RuntimeError("No embedding model is setted")
         
-    def FindChunks(self, embededQuestion : np.array, k : int = 2) -> list[str]:
+    def FindChunks(self, embededQuestion : np.array, k : int = 2, extend = 0) -> list[str]:
         if self.faissRAGIndex is None:
             raise RuntimeError("No index is setted")
 
@@ -104,15 +134,26 @@ class mainModel(Parameters):
         
         try:
             D, I = self.faissRAGIndex.search(embededQuestion, k=k)
-            chunks = [self.splittedTextForIndex[i] for i in I.tolist()[0]]
+
+            ids = list(I.tolist()[0])
+
+            finalIds = []
+
+            for i in ids:
+                for j in range(-extend, extend + 1):
+            
+                    if i + j >= 0 and i + j < len(self.splittedTextForIndex):
+                        finalIds.append(i + j)
+            
+            chunks = [self.splittedTextForIndex[i] for i in finalIds]
             return chunks
 
         except Exception as e:
             raise RuntimeError("Error while searching: " + str(e))
         
-    def ComputePrompt(self, question : str) -> str:
+    def ComputePrompt(self, question : str, k = 2, extend = 0) -> str:
         embededQuestion = self.EmbedQuestion(question)
-        chunks = self.FindChunks(embededQuestion=embededQuestion)
+        chunks = self.FindChunks(embededQuestion=embededQuestion, k=k, extend=extend)
         result = f'''Есть следующая информация
                     ---------------------
                     {chunks}

@@ -12,9 +12,11 @@ text = ""
 with open("test.txt", 'r') as file:
     text = file.read()
 
-thisModel.SplitText(text, 600, 100)
+thisModel.SplitText(text, "test", 600, 100)
 thisModel.EmbedTexts()
-prompt = thisModel.ComputePrompt("Что сказал Иван Золо по поводу видео?")
+thisModel.SaveTextAndEmbededVectorStorage()
+
+prompt = thisModel.ComputePrompt("Перечисли все DLC с кратким описанием", extend=2)
 print(thisModel.ComputeRequest(prompt))
 
 #print(thisModel.mainModelComputeRequest("Кто такой пушкин"))

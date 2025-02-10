@@ -3,3 +3,4 @@ models
 __pycache__
 test.txt
 download.sh
+vector_db
