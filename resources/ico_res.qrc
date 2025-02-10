@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>stop-pressed.png</file>
+    <file>stop.png</file>
+    <file>send-pressed.png</file>
+    <file>send.png</file>
+    <file>check-box-unchecked-pressed.png</file>
+    <file>check-box-unchecked.png</file>
+    <file>check-box-checked-pressed.png</file>
+    <file>check-box-checked.png</file>
+    <file>arrow-up-pressed.png</file>
+    <file>arrow-right-pressed.png</file>
+    <file>arrow-left-pressed.png</file>
+    <file>arrow-down-pressed.png</file>
+    <file>arrow-down.png</file>
+    <file>check-box-unchecked-pressed.png</file>
+    <file>check-box-unchecked.png</file>
+    <file>check-box-checked-pressed.png</file>
+    <file>check-box-checked.png</file>
+    <file>arrow-up.png</file>
+    <file>arrow-right.png</file>
+    <file>arrow-left.png</file>
+  </qresource>
+</RCC>
