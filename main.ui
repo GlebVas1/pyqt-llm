@@ -910,7 +910,7 @@ QCheckBox::indicator:checked:pressed {
            </spacer>
           </item>
           <item>
-           <widget class="QFrame" name="frame_9">
+           <widget class="QFrame" name="DialogFrame">
             <property name="minimumSize">
              <size>
               <width>800</width>
@@ -942,8 +942,12 @@ QCheckBox::indicator:checked:pressed {
              <property name="horizontalSpacing">
               <number>5</number>
              </property>
-             <item row="0" column="1">
-              <widget class="QListView" name="listView"/>
+             <item row="0" column="0">
+              <widget class="QListWidget" name="DialogListWidget">
+               <property name="spacing">
+                <number>20</number>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>

@@ -2,7 +2,8 @@ import mainui
 import model
 import os
 
-
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
 from functools import partial
 
@@ -109,10 +110,31 @@ class Controller(mainui.Ui_MainWindow):
         except RuntimeError as e:
             self.ShowMessageBox(str(e))
 
-    def SendPrompt(self):
-
-        computedPrompt = "None"
+    def AddToListViewMessages(self, message : str, type : int = 0):
         
+
+        # type 1 = answer
+        # type 0 = prompt
+
+        messageLabel = QtWidgets.QLabel()
+        messageLabel.setText(message)
+        messageLabel.setObjectName("message")
+        messageLabel.setMaximumWidth(200)
+        messageLabel.setStyleSheet('''
+                                   background-color : white; \n
+                                   color : black;
+                                   ''')
+        messageLabel.setAlignment(Qt.AlignmentFlag.AlignLeft if type == 1 else Qt.AlignmentFlag.AlignRight)
+
+        item = QtWidgets.QListWidgetItem(self.DialogListWidget) 
+        item.setSizeHint = (messageLabel.sizeHint())
+        
+        self.DialogListWidget.addItem(item)
+        self.DialogListWidget.setItemWidget(item, messageLabel)
+        
+
+    def SendPrompt(self):
+        computedPrompt = "None"
         try:
             computedPrompt = self.LLMModel.ComputePrompt(self.PromptTextEdit.toPlainText(),
                                                         k=self.VectorDataBaseSearchKSpinBox.value(),
@@ -126,12 +148,19 @@ class Controller(mainui.Ui_MainWindow):
             topK=self.GenerationSettingsTopKSpinBox.value(),
             echo=self.GenerationSettingsEchoCheckBox.isChecked()
         )
-
+        result = None
         try: 
             result = self.LLMModel.ComputeRequest(computedPrompt)
             
         except Exception as e:
             self.ShowMessageBox(str(e))
+            return
+
+        self.AddToListViewMessages(self.PromptTextEdit.toPlainText())
+        self.PromptTextEdit.setText("")
+        self.AddToListViewMessages(result)
+
+
 
     def LoadTextFile(self):
         filePath = self.OpenFileDialog()

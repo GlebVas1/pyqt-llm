@@ -34,4 +34,7 @@ app = QtWidgets.QApplication(sys.argv)
 frame = App()
 frame.show()
 
+frame.AddToListViewMessages("AAAAA\nAAAAAAAAA\nAAAAAAA\nAAAAAAAAAA\naa", 0)
+frame.AddToListViewMessages("AAAAA\nAAAAAAAAA\nAAAAAAA\nAAAAAAAAAA\naa", 1)
+
 app.exec()
