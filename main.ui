@@ -93,7 +93,8 @@ QSpinBox::up-button {
 subcontrol-origin: border;
 subcontrol-position: center right; 
 border-image: url(:/icons/arrow-right.png);
-border : 0px;
+border-color: black;
+border : 1px;
 right : 5px;
 width : 5px;
 }
@@ -106,7 +107,8 @@ QSpinBox::down-button {
 subcontrol-origin: border;
 subcontrol-position: center left ;
 border-image: url(:/icons/arrow-left.png);
-border : 0px;
+border-color: black;
+border : 1px;
 left : 5px;
 width : 5px;
 }
@@ -140,11 +142,11 @@ QComboBox::drop-down::pressed {
 
 QComboBox QAbstractItemView {
 	color : black;
-    background-color : rgb(69, 69, 69);
-	border-radius : 6px;
+    background-color : white;
+	border-radius : 5px;
 	border : 1px solid black;
 	outline : 0px;
-	selection-background-color: lightgray;
+	selection-background-color: black;
 }
 
 QComboBox QAbstractItemView QScrollBar:vertical {
@@ -188,7 +190,7 @@ QProgressBar {
 
  QProgressBar::chunk {
      background-color: black;
-     width: 15px;
+     width: 2px;
  }
 
 QLineEdit {
@@ -327,8 +329,14 @@ QLineEdit {
               <property name="alignment">
                <set>Qt::AlignCenter</set>
               </property>
+              <property name="minimum">
+               <number>500</number>
+              </property>
               <property name="maximum">
-               <number>1000</number>
+               <number>9000</number>
+              </property>
+              <property name="singleStep">
+               <number>500</number>
               </property>
               <property name="value">
                <number>1000</number>
@@ -382,6 +390,12 @@ QLineEdit {
               <property name="alignment">
                <set>Qt::AlignCenter</set>
               </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>128</number>
+              </property>
              </widget>
              <widget class="QLabel" name="label_4">
               <property name="geometry">
@@ -412,6 +426,9 @@ QLineEdit {
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+              <property name="maximum">
+               <number>100</number>
               </property>
              </widget>
              <widget class="QComboBox" name="AnswerModelComboBox">
@@ -476,7 +493,7 @@ QLineEdit {
                  <x>10</x>
                  <y>-3</y>
                  <width>141</width>
-                 <height>41</height>
+                 <height>36</height>
                 </rect>
                </property>
                <property name="font">
@@ -546,7 +563,7 @@ QLineEdit {
                  <x>5</x>
                  <y>-1</y>
                  <width>181</width>
-                 <height>31</height>
+                 <height>36</height>
                 </rect>
                </property>
                <property name="font">
@@ -669,6 +686,15 @@ QCheckBox::indicator:checked:pressed {
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>200</number>
+              </property>
+              <property name="maximum">
+               <number>9999</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
               </property>
              </widget>
              <widget class="QLabel" name="label_6">
@@ -804,6 +830,22 @@ QCheckBox::indicator:checked:pressed {
                    </size>
                   </property>
                  </widget>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer_5">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Minimum</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>5</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                 <item>
                  <widget class="QTextEdit" name="PresetTextEdit"/>
@@ -1111,6 +1153,15 @@ QPushButton::pressed{
               <property name="alignment">
                <set>Qt::AlignCenter</set>
               </property>
+              <property name="minimum">
+               <number>100</number>
+              </property>
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
+              </property>
              </widget>
              <widget class="QLabel" name="label_11">
               <property name="geometry">
@@ -1125,7 +1176,7 @@ QPushButton::pressed{
                <string>Chunk overlap</string>
               </property>
              </widget>
-             <widget class="QSpinBox" name="TextProcessingChunkOverlap">
+             <widget class="QSpinBox" name="TextProcessingChunkOverlapSpinBox">
               <property name="geometry">
                <rect>
                 <x>140</x>
@@ -1136,6 +1187,12 @@ QPushButton::pressed{
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>10</number>
               </property>
              </widget>
              <widget class="QPushButton" name="TextProcessingLoadPushButton">
@@ -1225,7 +1282,7 @@ QPushButton::pressed{
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
              </property>
-             <widget class="QSpinBox" name="EmbeddingModelContextSpinBox">
+             <widget class="QSpinBox" name="EmbeddingModelContextTokensSpinBox">
               <property name="geometry">
                <rect>
                 <x>140</x>
@@ -1236,6 +1293,15 @@ QPushButton::pressed{
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>500</number>
+              </property>
+              <property name="maximum">
+               <number>9999</number>
+              </property>
+              <property name="singleStep">
+               <number>500</number>
               </property>
              </widget>
              <widget class="QLabel" name="label_13">
@@ -1270,6 +1336,12 @@ QPushButton::pressed{
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>128</number>
               </property>
              </widget>
              <widget class="QLabel" name="label_14">
@@ -1444,7 +1516,7 @@ QPushButton::pressed{
                </rect>
               </property>
               <property name="value">
-               <number>24</number>
+               <number>13</number>
               </property>
               <property name="textVisible">
                <bool>false</bool>
@@ -1506,6 +1578,12 @@ QPushButton::pressed{
               <property name="alignment">
                <set>Qt::AlignCenter</set>
               </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
              </widget>
              <widget class="QLabel" name="label_18">
               <property name="geometry">
@@ -1536,6 +1614,9 @@ QPushButton::pressed{
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+              <property name="maximum">
+               <number>5</number>
               </property>
              </widget>
              <widget class="QFrame" name="VectorDataBaseTitle">
@@ -1677,7 +1758,7 @@ QPushButton::pressed{
                </rect>
               </property>
               <property name="value">
-               <number>24</number>
+               <number>22</number>
               </property>
               <property name="textVisible">
                <bool>false</bool>

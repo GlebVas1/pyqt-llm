@@ -47,16 +47,8 @@ class mainModel(Parameters):
                 n_gpu_layers=nGPULayers        # Number of model layers to offload to GPU
             )
             self.usedEmbeddingModel = path.split("/")[-1].split(".")[0]
-        except:
-            raise RuntimeError("Can't instantiate gguf model")
-
-    def LoadGenerationKwargs(self) -> None:
-        self.generationKwargs = {
-            "max_tokens":2000,
-            "stop":["</s>"],
-            "echo":False, # Echo the prompt in the output
-            "top_k":1 # This is essentiallys greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
-        }
+        except Exception as e:
+            raise RuntimeError("Can't instantiate gguf model " + str(e))
 
     def LoadAnswerModelFromFile(self, path : str = "./models/ggml-model-Q8_0.gguf", nCtx=4000, nThreads=54, nGPULayers=0) -> None:
         try:
@@ -66,9 +58,16 @@ class mainModel(Parameters):
                 n_threads=nThreads,            # Number of CPU threads to use
                 n_gpu_layers=nGPULayers        # Number of model layers to offload to GPU
             )
-        except:
-            raise RuntimeError("Can't instantiate gguf model")
+        except Exception as e:
+            raise RuntimeError("Can't instantiate gguf model " + str(e))
     
+    def LoadGenerationKwargs(self, maxTokens : int = 2000, stop : list[str] = ["</s>"], echo : bool = False, topK = 1) -> None:
+        self.generationKwargs = {
+            "max_tokens":2000,
+            "stop":["</s>"],
+            "echo":False, # Echo the prompt in the output
+            "top_k":1 # This is essentiallys greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
+        }
 
     def SplitText(self, text, textDocumentName = "document", chunkSize : int = 600, chunkOverlap : int = 100) -> list[str]:
         splitter = RecursiveCharacterTextSplitter(chunk_size=chunkSize, chunk_overlap=chunkOverlap)
@@ -76,7 +75,7 @@ class mainModel(Parameters):
         self.textDocumentName = textDocumentName
         return self.splittedTextForIndex
 
-    def SetSplitTextsProcessFunction(self, func : function[float]):
+    def SetSplitTextsProcessFunction(self, func):
         self.splitTextProcessFunction = func
     
     def EmbedTexts(self) -> None:
@@ -90,7 +89,7 @@ class mainModel(Parameters):
         textsEmbeds = []
 
         totalCount = len(self.splittedTextForIndex)
-        valuePerStep = 100.0 / float(totalCount)
+        valuePerStep = 1.0 / float(totalCount)
         currentProgress = 0.0
 
         for text in self.splittedTextForIndex:
@@ -98,6 +97,7 @@ class mainModel(Parameters):
 
             # Because of embed queue sometimes incorrectly parse model results in it
             currentProgress += valuePerStep
+
             if self.splitTextProcessFunction is not None:
                 self.splitTextProcessFunction(currentProgress)
             

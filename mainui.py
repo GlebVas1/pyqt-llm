@@ -94,7 +94,8 @@ class Ui_MainWindow(object):
 "subcontrol-origin: border;\n"
 "subcontrol-position: center right; \n"
 "border-image: url(:/icons/arrow-right.png);\n"
-"border : 0px;\n"
+"border-color: black;\n"
+"border : 1px;\n"
 "right : 5px;\n"
 "width : 5px;\n"
 "}\n"
@@ -107,7 +108,8 @@ class Ui_MainWindow(object):
 "subcontrol-origin: border;\n"
 "subcontrol-position: center left ;\n"
 "border-image: url(:/icons/arrow-left.png);\n"
-"border : 0px;\n"
+"border-color: black;\n"
+"border : 1px;\n"
 "left : 5px;\n"
 "width : 5px;\n"
 "}\n"
@@ -141,11 +143,11 @@ class Ui_MainWindow(object):
 "\n"
 "QComboBox QAbstractItemView {\n"
 "    color : black;\n"
-"    background-color : rgb(69, 69, 69);\n"
-"    border-radius : 6px;\n"
+"    background-color : white;\n"
+"    border-radius : 5px;\n"
 "    border : 1px solid black;\n"
 "    outline : 0px;\n"
-"    selection-background-color: lightgray;\n"
+"    selection-background-color: black;\n"
 "}\n"
 "\n"
 "QComboBox QAbstractItemView QScrollBar:vertical {\n"
@@ -189,7 +191,7 @@ class Ui_MainWindow(object):
 "\n"
 " QProgressBar::chunk {\n"
 "     background-color: black;\n"
-"     width: 15px;\n"
+"     width: 2px;\n"
 " }\n"
 "\n"
 "QLineEdit {\n"
@@ -247,7 +249,9 @@ class Ui_MainWindow(object):
         self.AnswerModelContextTokensSpinBox.setGeometry(QtCore.QRect(150, 90, 81, 24))
         self.AnswerModelContextTokensSpinBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.AnswerModelContextTokensSpinBox.setAlignment(QtCore.Qt.AlignCenter)
-        self.AnswerModelContextTokensSpinBox.setMaximum(1000)
+        self.AnswerModelContextTokensSpinBox.setMinimum(500)
+        self.AnswerModelContextTokensSpinBox.setMaximum(9000)
+        self.AnswerModelContextTokensSpinBox.setSingleStep(500)
         self.AnswerModelContextTokensSpinBox.setProperty("value", 1000)
         self.AnswerModelContextTokensSpinBox.setObjectName("AnswerModelContextTokensSpinBox")
         self.label_2 = QtWidgets.QLabel(self.AnswerModelFrame)
@@ -265,6 +269,8 @@ class Ui_MainWindow(object):
         self.AnswerModelThreadsSpinBox = QtWidgets.QSpinBox(self.AnswerModelFrame)
         self.AnswerModelThreadsSpinBox.setGeometry(QtCore.QRect(150, 125, 81, 24))
         self.AnswerModelThreadsSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.AnswerModelThreadsSpinBox.setMinimum(1)
+        self.AnswerModelThreadsSpinBox.setMaximum(128)
         self.AnswerModelThreadsSpinBox.setObjectName("AnswerModelThreadsSpinBox")
         self.label_4 = QtWidgets.QLabel(self.AnswerModelFrame)
         self.label_4.setGeometry(QtCore.QRect(10, 160, 111, 26))
@@ -275,6 +281,7 @@ class Ui_MainWindow(object):
         self.AnswerModelGPULayersSpinBox = QtWidgets.QSpinBox(self.AnswerModelFrame)
         self.AnswerModelGPULayersSpinBox.setGeometry(QtCore.QRect(150, 160, 81, 24))
         self.AnswerModelGPULayersSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.AnswerModelGPULayersSpinBox.setMaximum(100)
         self.AnswerModelGPULayersSpinBox.setObjectName("AnswerModelGPULayersSpinBox")
         self.AnswerModelComboBox = QtWidgets.QComboBox(self.AnswerModelFrame)
         self.AnswerModelComboBox.setGeometry(QtCore.QRect(10, 40, 221, 31))
@@ -296,7 +303,7 @@ class Ui_MainWindow(object):
         self.AnswerModelTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.AnswerModelTitle.setObjectName("AnswerModelTitle")
         self.label = QtWidgets.QLabel(self.AnswerModelTitle)
-        self.label.setGeometry(QtCore.QRect(10, -3, 141, 41))
+        self.label.setGeometry(QtCore.QRect(10, -3, 141, 36))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -323,7 +330,7 @@ class Ui_MainWindow(object):
         self.GenerationSettingsTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.GenerationSettingsTitle.setObjectName("GenerationSettingsTitle")
         self.label_22 = QtWidgets.QLabel(self.GenerationSettingsTitle)
-        self.label_22.setGeometry(QtCore.QRect(5, -1, 181, 31))
+        self.label_22.setGeometry(QtCore.QRect(5, -1, 181, 36))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -382,6 +389,9 @@ class Ui_MainWindow(object):
         self.GenerationSettingsMaxTokensSpinBox = QtWidgets.QSpinBox(self.GenerationSettingsFrame)
         self.GenerationSettingsMaxTokensSpinBox.setGeometry(QtCore.QRect(145, 40, 81, 24))
         self.GenerationSettingsMaxTokensSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.GenerationSettingsMaxTokensSpinBox.setMinimum(200)
+        self.GenerationSettingsMaxTokensSpinBox.setMaximum(9999)
+        self.GenerationSettingsMaxTokensSpinBox.setSingleStep(100)
         self.GenerationSettingsMaxTokensSpinBox.setObjectName("GenerationSettingsMaxTokensSpinBox")
         self.label_6 = QtWidgets.QLabel(self.GenerationSettingsFrame)
         self.label_6.setGeometry(QtCore.QRect(10, 75, 101, 26))
@@ -434,24 +444,26 @@ class Ui_MainWindow(object):
         self.PresetComboBox.setMaximumSize(QtCore.QSize(16777215, 30))
         self.PresetComboBox.setObjectName("PresetComboBox")
         self.PresetVerticalLayout.addWidget(self.PresetComboBox)
+        spacerItem = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        self.PresetVerticalLayout.addItem(spacerItem)
         self.PresetTextEdit = QtWidgets.QTextEdit(self.PresetFrame)
         self.PresetTextEdit.setObjectName("PresetTextEdit")
         self.PresetVerticalLayout.addWidget(self.PresetTextEdit)
         self.gridLayout_4.addLayout(self.PresetVerticalLayout, 1, 0, 1, 1)
         self.LeftFrameVerticalLayout.addWidget(self.PresetFrame)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.LeftFrameVerticalLayout.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.LeftFrameVerticalLayout.addItem(spacerItem1)
         self.gridLayout_2.addLayout(self.LeftFrameVerticalLayout, 0, 0, 1, 1)
         self.horizontalLayout.addWidget(self.LeftFrame)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem1 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem1)
+        spacerItem2 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem2)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
         self.verticalLayout_4.setSpacing(20)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_4.addItem(spacerItem2)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem3)
         self.frame_9 = QtWidgets.QFrame(self.centralwidget)
         self.frame_9.setMinimumSize(QtCore.QSize(800, 800))
         self.frame_9.setMaximumSize(QtCore.QSize(1000, 800))
@@ -512,11 +524,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.PromptButtons)
         self.gridLayout_6.addLayout(self.horizontalLayout_3, 0, 0, 1, 1)
         self.verticalLayout_4.addWidget(self.PromptTextFrame)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_4.addItem(spacerItem3)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem4)
         self.horizontalLayout_2.addLayout(self.verticalLayout_4)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem4)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem5)
         self.horizontalLayout.addLayout(self.horizontalLayout_2)
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
         self.frame_2.setMinimumSize(QtCore.QSize(260, 0))
@@ -539,14 +551,19 @@ class Ui_MainWindow(object):
         self.TextProcessingChunkSizeSpinBox = QtWidgets.QSpinBox(self.TextProcessingFrame)
         self.TextProcessingChunkSizeSpinBox.setGeometry(QtCore.QRect(140, 40, 91, 24))
         self.TextProcessingChunkSizeSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.TextProcessingChunkSizeSpinBox.setMinimum(100)
+        self.TextProcessingChunkSizeSpinBox.setMaximum(2000)
+        self.TextProcessingChunkSizeSpinBox.setSingleStep(100)
         self.TextProcessingChunkSizeSpinBox.setObjectName("TextProcessingChunkSizeSpinBox")
         self.label_11 = QtWidgets.QLabel(self.TextProcessingFrame)
         self.label_11.setGeometry(QtCore.QRect(10, 75, 101, 26))
         self.label_11.setObjectName("label_11")
-        self.TextProcessingChunkOverlap = QtWidgets.QSpinBox(self.TextProcessingFrame)
-        self.TextProcessingChunkOverlap.setGeometry(QtCore.QRect(140, 75, 91, 24))
-        self.TextProcessingChunkOverlap.setAlignment(QtCore.Qt.AlignCenter)
-        self.TextProcessingChunkOverlap.setObjectName("TextProcessingChunkOverlap")
+        self.TextProcessingChunkOverlapSpinBox = QtWidgets.QSpinBox(self.TextProcessingFrame)
+        self.TextProcessingChunkOverlapSpinBox.setGeometry(QtCore.QRect(140, 75, 91, 24))
+        self.TextProcessingChunkOverlapSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.TextProcessingChunkOverlapSpinBox.setMaximum(200)
+        self.TextProcessingChunkOverlapSpinBox.setSingleStep(10)
+        self.TextProcessingChunkOverlapSpinBox.setObjectName("TextProcessingChunkOverlapSpinBox")
         self.TextProcessingLoadPushButton = QtWidgets.QPushButton(self.TextProcessingFrame)
         self.TextProcessingLoadPushButton.setGeometry(QtCore.QRect(10, 110, 101, 26))
         self.TextProcessingLoadPushButton.setObjectName("TextProcessingLoadPushButton")
@@ -578,10 +595,13 @@ class Ui_MainWindow(object):
         self.EmbeddingModelFrame.setMaximumSize(QtCore.QSize(16777215, 220))
         self.EmbeddingModelFrame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.EmbeddingModelFrame.setObjectName("EmbeddingModelFrame")
-        self.EmbeddingModelContextSpinBox = QtWidgets.QSpinBox(self.EmbeddingModelFrame)
-        self.EmbeddingModelContextSpinBox.setGeometry(QtCore.QRect(140, 80, 91, 24))
-        self.EmbeddingModelContextSpinBox.setAlignment(QtCore.Qt.AlignCenter)
-        self.EmbeddingModelContextSpinBox.setObjectName("EmbeddingModelContextSpinBox")
+        self.EmbeddingModelContextTokensSpinBox = QtWidgets.QSpinBox(self.EmbeddingModelFrame)
+        self.EmbeddingModelContextTokensSpinBox.setGeometry(QtCore.QRect(140, 80, 91, 24))
+        self.EmbeddingModelContextTokensSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.EmbeddingModelContextTokensSpinBox.setMinimum(500)
+        self.EmbeddingModelContextTokensSpinBox.setMaximum(9999)
+        self.EmbeddingModelContextTokensSpinBox.setSingleStep(500)
+        self.EmbeddingModelContextTokensSpinBox.setObjectName("EmbeddingModelContextTokensSpinBox")
         self.label_13 = QtWidgets.QLabel(self.EmbeddingModelFrame)
         self.label_13.setGeometry(QtCore.QRect(10, 115, 111, 26))
         font = QtGui.QFont()
@@ -592,6 +612,8 @@ class Ui_MainWindow(object):
         self.EmbeddingModelThreadsSpinBox.setGeometry(QtCore.QRect(140, 115, 91, 24))
         self.EmbeddingModelThreadsSpinBox.setFrame(True)
         self.EmbeddingModelThreadsSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.EmbeddingModelThreadsSpinBox.setMinimum(1)
+        self.EmbeddingModelThreadsSpinBox.setMaximum(128)
         self.EmbeddingModelThreadsSpinBox.setObjectName("EmbeddingModelThreadsSpinBox")
         self.label_14 = QtWidgets.QLabel(self.EmbeddingModelFrame)
         self.label_14.setGeometry(QtCore.QRect(10, 80, 111, 26))
@@ -649,7 +671,7 @@ class Ui_MainWindow(object):
         self.VectorDataBaseProcessPushButton.setObjectName("VectorDataBaseProcessPushButton")
         self.VectorDataBaseProgressBar = QtWidgets.QProgressBar(self.VectorDataBaseFrame)
         self.VectorDataBaseProgressBar.setGeometry(QtCore.QRect(10, 80, 221, 26))
-        self.VectorDataBaseProgressBar.setProperty("value", 24)
+        self.VectorDataBaseProgressBar.setProperty("value", 13)
         self.VectorDataBaseProgressBar.setTextVisible(False)
         self.VectorDataBaseProgressBar.setObjectName("VectorDataBaseProgressBar")
         self.VEctorDataBaseSavePushButton = QtWidgets.QPushButton(self.VectorDataBaseFrame)
@@ -667,6 +689,8 @@ class Ui_MainWindow(object):
         self.VectorDataBaseSearchKSpinBox = QtWidgets.QSpinBox(self.VectorDataBaseFrame)
         self.VectorDataBaseSearchKSpinBox.setGeometry(QtCore.QRect(140, 160, 91, 24))
         self.VectorDataBaseSearchKSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.VectorDataBaseSearchKSpinBox.setMinimum(1)
+        self.VectorDataBaseSearchKSpinBox.setMaximum(20)
         self.VectorDataBaseSearchKSpinBox.setObjectName("VectorDataBaseSearchKSpinBox")
         self.label_18 = QtWidgets.QLabel(self.VectorDataBaseFrame)
         self.label_18.setGeometry(QtCore.QRect(10, 200, 131, 20))
@@ -677,6 +701,7 @@ class Ui_MainWindow(object):
         self.VectorDataBaseExtendSpinBox = QtWidgets.QSpinBox(self.VectorDataBaseFrame)
         self.VectorDataBaseExtendSpinBox.setGeometry(QtCore.QRect(140, 200, 91, 24))
         self.VectorDataBaseExtendSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.VectorDataBaseExtendSpinBox.setMaximum(5)
         self.VectorDataBaseExtendSpinBox.setObjectName("VectorDataBaseExtendSpinBox")
         self.VectorDataBaseTitle = QtWidgets.QFrame(self.VectorDataBaseFrame)
         self.VectorDataBaseTitle.setGeometry(QtCore.QRect(0, 0, 241, 31))
@@ -731,7 +756,7 @@ class Ui_MainWindow(object):
         self.ModelDownloadingDownloadPushButton.setObjectName("ModelDownloadingDownloadPushButton")
         self.ModelDownloadingProgressBar = QtWidgets.QProgressBar(self.ModelDownloadingFrame)
         self.ModelDownloadingProgressBar.setGeometry(QtCore.QRect(10, 120, 216, 26))
-        self.ModelDownloadingProgressBar.setProperty("value", 24)
+        self.ModelDownloadingProgressBar.setProperty("value", 22)
         self.ModelDownloadingProgressBar.setTextVisible(False)
         self.ModelDownloadingProgressBar.setObjectName("ModelDownloadingProgressBar")
         self.ModelDownloadingStopPushButton = QtWidgets.QPushButton(self.ModelDownloadingFrame)
@@ -767,8 +792,8 @@ class Ui_MainWindow(object):
         self.LanguageComboBox.setGeometry(QtCore.QRect(10, 40, 221, 31))
         self.LanguageComboBox.setObjectName("LanguageComboBox")
         self.verticalLayout_2.addWidget(self.LanguageFrame)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem5)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem6)
         self.gridLayout_3.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
         self.horizontalLayout.addWidget(self.frame_2)
         self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
