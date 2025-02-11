@@ -7,6 +7,8 @@ from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
 from functools import partial
 
+from dialog_item import CustomDialogWidget
+
 class Controller(mainui.Ui_MainWindow):
     LLMModel = model.mainModel()
 
@@ -118,46 +120,33 @@ class Controller(mainui.Ui_MainWindow):
         # type 1 = answer
         # type 0 = prompt
 
-        messageOut = QtWidgets.QTextEdit()
-        messageOut.setObjectName("message")
-        messageOut.setStyleSheet('''
-                                   background-color : white; \n
-                                   color : black;
-                                   ''')
-
-        messageOut.setMarkdown(message)
-        messageOut.show()
-        print(messageOut.document().size().height())
-
-        actualHeight = int(messageOut.document().size().height()) + 40
-        actualWidth = int(messageOut.document().size().width()) + 40
-
-        messageOut.setMinimumHeight(actualHeight)
-        messageOut.setMaximumHeight(actualHeight)
-
-        messageOut.setMinimumWidth(actualWidth)
-        messageOut.setMaximumWidth(actualHeight)
-        
-        messageOut.setReadOnly(True)
-        
-        messageHorizontalLayout = QtWidgets.QHBoxLayout()
-        messageHorizontalLayout.addWidget(messageOut)
+        messageOut = CustomDialogWidget()
+        messageOut.Initialize(message, type)
 
         item = QtWidgets.QListWidgetItem(self.DialogListWidget) 
         
         # it doesn't update even after show()
         # item.setSizeHint(messageOut.sizeHint())
 
-        item.setSizeHint(QSize(200, actualHeight))
+        messageOut.setFixedWidth(self.DialogListWidget.width() - 40)
+
+        messageOut.Resize()
+
+        item.setSizeHint(messageOut.sizeHint())
+
         #item.setTextAlignment(Qt.AlignmentFlag.AlignLeft if type == 1 else Qt.AlignmentFlag.AlignRight)
         
         self.DialogListWidget.addItem(item)
-        self.DialogListWidget.setItemWidget(item, messageHorizontalLayout)
-       
+        self.DialogListWidget.setItemWidget(item, messageOut)
+        self.DialogListWidget.scrollToBottom()
         self.DialogListWidget.show()
         
 
     def SendPrompt(self):
+        self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=0)
+        self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=1)
+
+        return
         computedPrompt = "None"
         try:
             computedPrompt = self.LLMModel.ComputePrompt(self.PromptTextEdit.toPlainText(),
