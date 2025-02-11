@@ -3,7 +3,7 @@ import model
 import os
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
 from functools import partial
 
@@ -16,6 +16,7 @@ class Controller(mainui.Ui_MainWindow):
         self.setupUi(self)
         self.InitializeComboBoxes()
         self.InitializeActions()
+        self.InitializeChatField()
         self.AddShadows()
 
     def AddShadows(self):
@@ -55,7 +56,9 @@ class Controller(mainui.Ui_MainWindow):
     
         return selectedFile
         
-
+    def InitializeChatField(self):
+        self.DialogListWidget.setSpacing(10)
+        self.DialogListWidget.setContentsMargins(5,5,5,5)
 
     
     def InitializeComboBoxes(self) -> None:
@@ -112,25 +115,46 @@ class Controller(mainui.Ui_MainWindow):
 
     def AddToListViewMessages(self, message : str, type : int = 0):
         
-
         # type 1 = answer
         # type 0 = prompt
 
-        messageLabel = QtWidgets.QLabel()
-        messageLabel.setText(message)
-        messageLabel.setObjectName("message")
-        messageLabel.setMaximumWidth(200)
-        messageLabel.setStyleSheet('''
+        messageOut = QtWidgets.QTextEdit()
+        messageOut.setObjectName("message")
+        messageOut.setStyleSheet('''
                                    background-color : white; \n
                                    color : black;
                                    ''')
-        messageLabel.setAlignment(Qt.AlignmentFlag.AlignLeft if type == 1 else Qt.AlignmentFlag.AlignRight)
+
+        messageOut.setMarkdown(message)
+        messageOut.show()
+        print(messageOut.document().size().height())
+
+        actualHeight = int(messageOut.document().size().height()) + 40
+        actualWidth = int(messageOut.document().size().width()) + 40
+
+        messageOut.setMinimumHeight(actualHeight)
+        messageOut.setMaximumHeight(actualHeight)
+
+        messageOut.setMinimumWidth(actualWidth)
+        messageOut.setMaximumWidth(actualHeight)
+        
+        messageOut.setReadOnly(True)
+        
+        messageHorizontalLayout = QtWidgets.QHBoxLayout()
+        messageHorizontalLayout.addWidget(messageOut)
 
         item = QtWidgets.QListWidgetItem(self.DialogListWidget) 
-        item.setSizeHint = (messageLabel.sizeHint())
+        
+        # it doesn't update even after show()
+        # item.setSizeHint(messageOut.sizeHint())
+
+        item.setSizeHint(QSize(200, actualHeight))
+        #item.setTextAlignment(Qt.AlignmentFlag.AlignLeft if type == 1 else Qt.AlignmentFlag.AlignRight)
         
         self.DialogListWidget.addItem(item)
-        self.DialogListWidget.setItemWidget(item, messageLabel)
+        self.DialogListWidget.setItemWidget(item, messageHorizontalLayout)
+       
+        self.DialogListWidget.show()
         
 
     def SendPrompt(self):
@@ -185,6 +209,7 @@ class Controller(mainui.Ui_MainWindow):
     def EmbedSplittedText(self):
         self.LLMModel.splitTextProcessFunction = self.ChangeEmbedProgressBar
         self.LLMModel.EmbedTexts()
+
 
 
 

@@ -474,6 +474,8 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setHorizontalSpacing(5)
         self.gridLayout_5.setObjectName("gridLayout_5")
         self.DialogListWidget = QtWidgets.QListWidget(self.DialogFrame)
+        self.DialogListWidget.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.DialogListWidget.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         self.DialogListWidget.setObjectName("DialogListWidget")
         self.gridLayout_5.addWidget(self.DialogListWidget, 0, 0, 1, 1)
         self.verticalLayout_4.addWidget(self.DialogFrame)

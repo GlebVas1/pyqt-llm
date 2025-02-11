@@ -944,6 +944,12 @@ QCheckBox::indicator:checked:pressed {
              </property>
              <item row="0" column="0">
               <widget class="QListWidget" name="DialogListWidget">
+               <property name="verticalScrollMode">
+                <enum>QAbstractItemView::ScrollPerPixel</enum>
+               </property>
+               <property name="horizontalScrollMode">
+                <enum>QAbstractItemView::ScrollPerPixel</enum>
+               </property>
                <property name="spacing">
                 <number>20</number>
                </property>
