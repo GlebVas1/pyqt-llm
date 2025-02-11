@@ -7,11 +7,13 @@ def StyleSheetByTypeOfTheMessage(type : int) -> str:
         return '''
                 background-color : white; \n
                 color : black;
+                border-color : black;
                 '''
     else:
         return '''
-                background-color : rgb(120, 120, 120); \n
+                background-color : rgb(90, 90, 90); \n
                 color : white;
+                border-color : white;
                 '''
     
 
@@ -24,15 +26,13 @@ class CustomDialogWidget(QtWidgets.QWidget):
 
         self.textField = QtWidgets.QTextEdit(self)
         self.textField.setObjectName("message")
-        self.textField.setStyleSheet('''
-                                    background-color : white; \n
-                                    color : black;
-                                    ''')
+        self.textField.setStyleSheet(StyleSheetByTypeOfTheMessage(type))
 
         self.textField.setMarkdown(text)
         self.textField.document().adjustSize()
         self.textField.updateGeometry()
-
+        self.textField.setReadOnly(True)
+        
         print(self.textField.document().size().height())
 
         self.actualHeight = int(self.textField.document().size().height()) + 40

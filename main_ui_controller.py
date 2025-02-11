@@ -143,10 +143,10 @@ class Controller(mainui.Ui_MainWindow):
         
 
     def SendPrompt(self):
-        self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=0)
-        self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=1)
+        # self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=0)
+        # self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=1)
 
-        return
+        # return
         computedPrompt = "None"
         try:
             computedPrompt = self.LLMModel.ComputePrompt(self.PromptTextEdit.toPlainText(),
@@ -169,9 +169,9 @@ class Controller(mainui.Ui_MainWindow):
             self.ShowMessageBox(str(e))
             return
 
-        self.AddToListViewMessages(self.PromptTextEdit.toPlainText())
+        self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=0)
         self.PromptTextEdit.setText("")
-        self.AddToListViewMessages(result)
+        self.AddToListViewMessages(result[0], type=1)
 
 
 
