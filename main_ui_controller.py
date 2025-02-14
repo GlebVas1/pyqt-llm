@@ -22,21 +22,25 @@ class Controller(mainui.Ui_MainWindow):
         self.AddShadows()
 
     def AddShadows(self):
-        AMFeffect = QGraphicsDropShadowEffect()
-        AMFeffect.setOffset(0, 0)
-        AMFeffect.setBlurRadius(15)
-        self.AnswerModelFrame.setGraphicsEffect(AMFeffect)
+        frames = [self.AnswerModelFrame,
+         self.DialogFrame,
+         self.EmbeddingModelFrame,
+         self.GenerationSettingsFrame,
+         self.LanguageFrame,
+         self.LogoFrame,
+         self.ModelDownloadingFrame,
+         self.PromptTextFrame, 
+         self.PresetFrame, 
+         self.TextProcessingFrame,
+         self.VectorDataBaseFrame
+        ]
 
-        EMFeffect = QGraphicsDropShadowEffect()
-        EMFeffect.setOffset(0, 0)
-        EMFeffect.setBlurRadius(15)
+        for frame in frames:
+            effect = QGraphicsDropShadowEffect()
+            effect.setOffset(0, 0)
+            effect.setBlurRadius(15)
+            frame.setGraphicsEffect(effect)
 
-        self.EmbeddingModelFrame.setGraphicsEffect(EMFeffect)
-
-        LFeffect = QGraphicsDropShadowEffect()
-        LFeffect.setOffset(0, 0)
-        LFeffect.setBlurRadius(15)
-        self.LogoFrame.setGraphicsEffect(LFeffect)
 
     def ShowMessageBox(self, text : str) -> None:
         msg = QMessageBox()
@@ -143,10 +147,10 @@ class Controller(mainui.Ui_MainWindow):
         
 
     def SendPrompt(self):
-        # self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=0)
-        # self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=1)
+        #self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=0)
+        #self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=1)
 
-        # return
+        #return
         computedPrompt = "None"
         try:
             computedPrompt = self.LLMModel.ComputePrompt(self.PromptTextEdit.toPlainText(),
@@ -197,7 +201,10 @@ class Controller(mainui.Ui_MainWindow):
 
     def EmbedSplittedText(self):
         self.LLMModel.splitTextProcessFunction = self.ChangeEmbedProgressBar
-        self.LLMModel.EmbedTexts()
+        try:
+            self.LLMModel.EmbedTexts()
+        except Exception as e:
+            self.ShowMessageBox(str(e))
 
 
 

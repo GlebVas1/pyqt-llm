@@ -23,8 +23,8 @@ class Ui_MainWindow(object):
 "    border-radius : 5px;\n"
 "    border-style: solid;\n"
 "    border-width: 1px;\n"
-"    border-color: black;\n"
-"    background-color : rgb(240, 240, 240);\n"
+"    border-color: lightgray;\n"
+"    background-color : rgb(250, 250, 250);\n"
 "}\n"
 "\n"
 "QTextEdit {\n"
@@ -40,7 +40,7 @@ class Ui_MainWindow(object):
 "    border-radius : 5px;\n"
 "    border-style: solid;\n"
 "    border-width: 1px;\n"
-"    border-color: black;\n"
+"    border-color: lightgray;\n"
 "    background-color : white;\n"
 "    text-align: center;\n"
 "}\n"
@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
 "    border-radius : 3px;\n"
 "    border-style: solid;\n"
 "    border-width: 1px;\n"
-"    border-color: black;\n"
+"    border-color: lightgray;\n"
 "    background-color: rgb(180, 180, 180);\n"
 "}\n"
 "\n"
@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
 "    border-radius : 3px;\n"
 "    border-style: solid;\n"
 "    border-width: 1px;\n"
-"    border-color: black;\n"
+"    border-color: lightgray;\n"
 "    background-color: rgb(210, 210, 210);\n"
 "}\n"
 "\n"
@@ -73,7 +73,7 @@ class Ui_MainWindow(object):
 "\n"
 "QSpinBox {\n"
 "    border-radius : 5px;\n"
-"    border: 1px solid black;\n"
+"    border: 1px solid lightgray;\n"
 "    background-color : white; \n"
 "    color : black;\n"
 "    padding-left : 15px;\n"
@@ -120,7 +120,7 @@ class Ui_MainWindow(object):
 "\n"
 "QComboBox {\n"
 "    border-radius : 5px;\n"
-"    border : 1px solid black;\n"
+"    border : 1px solid lightgray;\n"
 "    background-color : white;\n"
 "    color : black;\n"
 "    padding-right : 20px;\n"
@@ -145,7 +145,7 @@ class Ui_MainWindow(object):
 "    color : black;\n"
 "    background-color : white;\n"
 "    border-radius : 5px;\n"
-"    border : 1px solid black;\n"
+"    border : 1px solid lightgray;\n"
 "    outline : 0px;\n"
 "    selection-background-color: black;\n"
 "}\n"
@@ -157,7 +157,7 @@ class Ui_MainWindow(object):
 "\n"
 "QComboBox QAbstractItemView QScrollBar::handle:vertical {\n"
 "  background-color: white;\n"
-"  border : 3px solid black;\n"
+"  border : 3px solid lightgray;\n"
 "  border-radius : 5px;\n"
 "  color: black;\n"
 "  max-width : 5px;\n"
@@ -185,7 +185,7 @@ class Ui_MainWindow(object):
 "\n"
 "QProgressBar {\n"
 "    color: white;\n"
-"     border: 1px solid black;\n"
+"     border: 1px solid lightgray;\n"
 "     border-radius: 5px;\n"
 " }\n"
 "\n"
@@ -196,7 +196,7 @@ class Ui_MainWindow(object):
 "\n"
 "QLineEdit {\n"
 "    border-radius: 5px;\n"
-"    border: 1px solid black;\n"
+"    border: 1px solid lightgray;\n"
 "}\n"
 "\n"
 "")
@@ -246,7 +246,7 @@ class Ui_MainWindow(object):
         self.AnswerModelFrame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.AnswerModelFrame.setObjectName("AnswerModelFrame")
         self.AnswerModelContextTokensSpinBox = QtWidgets.QSpinBox(self.AnswerModelFrame)
-        self.AnswerModelContextTokensSpinBox.setGeometry(QtCore.QRect(150, 90, 81, 24))
+        self.AnswerModelContextTokensSpinBox.setGeometry(QtCore.QRect(150, 90, 81, 22))
         self.AnswerModelContextTokensSpinBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.AnswerModelContextTokensSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AnswerModelContextTokensSpinBox.setMinimum(500)
@@ -267,7 +267,7 @@ class Ui_MainWindow(object):
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.AnswerModelThreadsSpinBox = QtWidgets.QSpinBox(self.AnswerModelFrame)
-        self.AnswerModelThreadsSpinBox.setGeometry(QtCore.QRect(150, 125, 81, 24))
+        self.AnswerModelThreadsSpinBox.setGeometry(QtCore.QRect(150, 125, 81, 22))
         self.AnswerModelThreadsSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AnswerModelThreadsSpinBox.setMinimum(1)
         self.AnswerModelThreadsSpinBox.setMaximum(128)
@@ -279,7 +279,7 @@ class Ui_MainWindow(object):
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.AnswerModelGPULayersSpinBox = QtWidgets.QSpinBox(self.AnswerModelFrame)
-        self.AnswerModelGPULayersSpinBox.setGeometry(QtCore.QRect(150, 160, 81, 24))
+        self.AnswerModelGPULayersSpinBox.setGeometry(QtCore.QRect(150, 160, 81, 22))
         self.AnswerModelGPULayersSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AnswerModelGPULayersSpinBox.setMaximum(100)
         self.AnswerModelGPULayersSpinBox.setObjectName("AnswerModelGPULayersSpinBox")
@@ -294,11 +294,9 @@ class Ui_MainWindow(object):
         self.AnswerModelTitle.setMinimumSize(QtCore.QSize(0, 31))
         self.AnswerModelTitle.setMaximumSize(QtCore.QSize(16777215, 31))
         self.AnswerModelTitle.setStyleSheet("QFrame {\n"
-"    border-radius : 5px;\n"
-"    border-bottom-left-radius : 0px;\n"
-"    border-bottom-right-radius : 0px;\n"
-"    background-color : black;\n"
-"    color : white;\n"
+"    border-radius : 0px;\n"
+"    background-color : lightgray;\n"
+"    color : black;\n"
 "}")
         self.AnswerModelTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.AnswerModelTitle.setObjectName("AnswerModelTitle")
@@ -321,11 +319,9 @@ class Ui_MainWindow(object):
         self.GenerationSettingsTitle.setMinimumSize(QtCore.QSize(0, 31))
         self.GenerationSettingsTitle.setMaximumSize(QtCore.QSize(16777215, 31))
         self.GenerationSettingsTitle.setStyleSheet("QFrame {\n"
-"    border-radius : 5px;\n"
-"    border-bottom-left-radius : 0px;\n"
-"    border-bottom-right-radius : 0px;\n"
-"    background-color : black;\n"
-"    color : white;\n"
+"    border-radius : 0px;\n"
+"    background-color : lightgray;\n"
+"    color : black;\n"
 "}")
         self.GenerationSettingsTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.GenerationSettingsTitle.setObjectName("GenerationSettingsTitle")
@@ -371,7 +367,7 @@ class Ui_MainWindow(object):
         self.GenerationSettingsEchoCheckBox.setTristate(False)
         self.GenerationSettingsEchoCheckBox.setObjectName("GenerationSettingsEchoCheckBox")
         self.GenerationSettingsTopKSpinBox = QtWidgets.QSpinBox(self.GenerationSettingsFrame)
-        self.GenerationSettingsTopKSpinBox.setGeometry(QtCore.QRect(145, 75, 81, 24))
+        self.GenerationSettingsTopKSpinBox.setGeometry(QtCore.QRect(145, 75, 81, 22))
         self.GenerationSettingsTopKSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.GenerationSettingsTopKSpinBox.setObjectName("GenerationSettingsTopKSpinBox")
         self.label_5 = QtWidgets.QLabel(self.GenerationSettingsFrame)
@@ -387,7 +383,7 @@ class Ui_MainWindow(object):
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.GenerationSettingsMaxTokensSpinBox = QtWidgets.QSpinBox(self.GenerationSettingsFrame)
-        self.GenerationSettingsMaxTokensSpinBox.setGeometry(QtCore.QRect(145, 40, 81, 24))
+        self.GenerationSettingsMaxTokensSpinBox.setGeometry(QtCore.QRect(145, 40, 81, 22))
         self.GenerationSettingsMaxTokensSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.GenerationSettingsMaxTokensSpinBox.setMinimum(200)
         self.GenerationSettingsMaxTokensSpinBox.setMaximum(9999)
@@ -420,11 +416,9 @@ class Ui_MainWindow(object):
         self.PresetTitle.setMinimumSize(QtCore.QSize(0, 31))
         self.PresetTitle.setMaximumSize(QtCore.QSize(16777215, 31))
         self.PresetTitle.setStyleSheet("QFrame {\n"
-"    border-radius : 5px;\n"
-"    border-bottom-left-radius : 0px;\n"
-"    border-bottom-right-radius : 0px;\n"
-"    background-color : black;\n"
-"    color : white;\n"
+"    border-radius : 0px;\n"
+"    background-color : lightgray;\n"
+"    color : black;\n"
 "}")
         self.PresetTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.PresetTitle.setObjectName("PresetTitle")
@@ -480,8 +474,8 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addWidget(self.DialogListWidget, 0, 0, 1, 1)
         self.verticalLayout_4.addWidget(self.DialogFrame)
         self.PromptTextFrame = QtWidgets.QFrame(self.centralwidget)
-        self.PromptTextFrame.setMinimumSize(QtCore.QSize(800, 150))
-        self.PromptTextFrame.setMaximumSize(QtCore.QSize(1000, 150))
+        self.PromptTextFrame.setMinimumSize(QtCore.QSize(800, 145))
+        self.PromptTextFrame.setMaximumSize(QtCore.QSize(1000, 145))
         self.PromptTextFrame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.PromptTextFrame.setObjectName("PromptTextFrame")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.PromptTextFrame)
@@ -493,8 +487,8 @@ class Ui_MainWindow(object):
         self.PromptTextEdit.setObjectName("PromptTextEdit")
         self.horizontalLayout_3.addWidget(self.PromptTextEdit)
         self.PromptButtons = QtWidgets.QFrame(self.PromptTextFrame)
-        self.PromptButtons.setMinimumSize(QtCore.QSize(70, 0))
-        self.PromptButtons.setMaximumSize(QtCore.QSize(60, 16777215))
+        self.PromptButtons.setMinimumSize(QtCore.QSize(70, 130))
+        self.PromptButtons.setMaximumSize(QtCore.QSize(130, 16777215))
         self.PromptButtons.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.PromptButtons.setObjectName("PromptButtons")
         self.PromptSendPushButton = QtWidgets.QPushButton(self.PromptButtons)
@@ -551,7 +545,7 @@ class Ui_MainWindow(object):
         self.label_10.setGeometry(QtCore.QRect(10, 40, 101, 26))
         self.label_10.setObjectName("label_10")
         self.TextProcessingChunkSizeSpinBox = QtWidgets.QSpinBox(self.TextProcessingFrame)
-        self.TextProcessingChunkSizeSpinBox.setGeometry(QtCore.QRect(140, 40, 91, 24))
+        self.TextProcessingChunkSizeSpinBox.setGeometry(QtCore.QRect(140, 40, 91, 22))
         self.TextProcessingChunkSizeSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.TextProcessingChunkSizeSpinBox.setMinimum(100)
         self.TextProcessingChunkSizeSpinBox.setMaximum(2000)
@@ -561,7 +555,7 @@ class Ui_MainWindow(object):
         self.label_11.setGeometry(QtCore.QRect(10, 75, 101, 26))
         self.label_11.setObjectName("label_11")
         self.TextProcessingChunkOverlapSpinBox = QtWidgets.QSpinBox(self.TextProcessingFrame)
-        self.TextProcessingChunkOverlapSpinBox.setGeometry(QtCore.QRect(140, 75, 91, 24))
+        self.TextProcessingChunkOverlapSpinBox.setGeometry(QtCore.QRect(140, 75, 91, 22))
         self.TextProcessingChunkOverlapSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.TextProcessingChunkOverlapSpinBox.setMaximum(200)
         self.TextProcessingChunkOverlapSpinBox.setSingleStep(10)
@@ -575,11 +569,9 @@ class Ui_MainWindow(object):
         self.TextProcessingTitle = QtWidgets.QFrame(self.TextProcessingFrame)
         self.TextProcessingTitle.setGeometry(QtCore.QRect(0, 0, 241, 31))
         self.TextProcessingTitle.setStyleSheet("QFrame {\n"
-"    border-radius : 5px;\n"
-"    border-bottom-left-radius : 0px;\n"
-"    border-bottom-right-radius : 0px;\n"
-"    background-color : black;\n"
-"    color : white;\n"
+"    border-radius : 0px;\n"
+"    background-color : lightgray;\n"
+"    color : black;\n"
 "}")
         self.TextProcessingTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.TextProcessingTitle.setObjectName("TextProcessingTitle")
@@ -598,7 +590,7 @@ class Ui_MainWindow(object):
         self.EmbeddingModelFrame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.EmbeddingModelFrame.setObjectName("EmbeddingModelFrame")
         self.EmbeddingModelContextTokensSpinBox = QtWidgets.QSpinBox(self.EmbeddingModelFrame)
-        self.EmbeddingModelContextTokensSpinBox.setGeometry(QtCore.QRect(140, 80, 91, 24))
+        self.EmbeddingModelContextTokensSpinBox.setGeometry(QtCore.QRect(140, 80, 91, 22))
         self.EmbeddingModelContextTokensSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.EmbeddingModelContextTokensSpinBox.setMinimum(500)
         self.EmbeddingModelContextTokensSpinBox.setMaximum(9999)
@@ -611,7 +603,7 @@ class Ui_MainWindow(object):
         self.label_13.setFont(font)
         self.label_13.setObjectName("label_13")
         self.EmbeddingModelThreadsSpinBox = QtWidgets.QSpinBox(self.EmbeddingModelFrame)
-        self.EmbeddingModelThreadsSpinBox.setGeometry(QtCore.QRect(140, 115, 91, 24))
+        self.EmbeddingModelThreadsSpinBox.setGeometry(QtCore.QRect(140, 115, 91, 22))
         self.EmbeddingModelThreadsSpinBox.setFrame(True)
         self.EmbeddingModelThreadsSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.EmbeddingModelThreadsSpinBox.setMinimum(1)
@@ -624,7 +616,7 @@ class Ui_MainWindow(object):
         self.label_14.setFont(font)
         self.label_14.setObjectName("label_14")
         self.EmbeddingModelGPULayersSpinBox = QtWidgets.QSpinBox(self.EmbeddingModelFrame)
-        self.EmbeddingModelGPULayersSpinBox.setGeometry(QtCore.QRect(140, 150, 91, 24))
+        self.EmbeddingModelGPULayersSpinBox.setGeometry(QtCore.QRect(140, 150, 91, 22))
         self.EmbeddingModelGPULayersSpinBox.setStyleSheet("")
         self.EmbeddingModelGPULayersSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.EmbeddingModelGPULayersSpinBox.setObjectName("EmbeddingModelGPULayersSpinBox")
@@ -640,11 +632,9 @@ class Ui_MainWindow(object):
         self.frame_13 = QtWidgets.QFrame(self.EmbeddingModelFrame)
         self.frame_13.setGeometry(QtCore.QRect(0, 0, 241, 31))
         self.frame_13.setStyleSheet("QFrame {\n"
-"    border-radius : 5px;\n"
-"    border-bottom-left-radius : 0px;\n"
-"    border-bottom-right-radius : 0px;\n"
-"    background-color : black;\n"
-"    color : white;\n"
+"    border-radius : 0px;\n"
+"    background-color : lightgray;\n"
+"    color : black;\n"
 "}")
         self.frame_13.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_13.setObjectName("frame_13")
@@ -689,7 +679,7 @@ class Ui_MainWindow(object):
         self.label_17.setFont(font)
         self.label_17.setObjectName("label_17")
         self.VectorDataBaseSearchKSpinBox = QtWidgets.QSpinBox(self.VectorDataBaseFrame)
-        self.VectorDataBaseSearchKSpinBox.setGeometry(QtCore.QRect(140, 160, 91, 24))
+        self.VectorDataBaseSearchKSpinBox.setGeometry(QtCore.QRect(140, 160, 91, 22))
         self.VectorDataBaseSearchKSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.VectorDataBaseSearchKSpinBox.setMinimum(1)
         self.VectorDataBaseSearchKSpinBox.setMaximum(20)
@@ -701,18 +691,16 @@ class Ui_MainWindow(object):
         self.label_18.setFont(font)
         self.label_18.setObjectName("label_18")
         self.VectorDataBaseExtendSpinBox = QtWidgets.QSpinBox(self.VectorDataBaseFrame)
-        self.VectorDataBaseExtendSpinBox.setGeometry(QtCore.QRect(140, 200, 91, 24))
+        self.VectorDataBaseExtendSpinBox.setGeometry(QtCore.QRect(140, 200, 91, 22))
         self.VectorDataBaseExtendSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.VectorDataBaseExtendSpinBox.setMaximum(5)
         self.VectorDataBaseExtendSpinBox.setObjectName("VectorDataBaseExtendSpinBox")
         self.VectorDataBaseTitle = QtWidgets.QFrame(self.VectorDataBaseFrame)
         self.VectorDataBaseTitle.setGeometry(QtCore.QRect(0, 0, 241, 31))
         self.VectorDataBaseTitle.setStyleSheet("QFrame {\n"
-"    border-radius : 5px;\n"
-"    border-bottom-left-radius : 0px;\n"
-"    border-bottom-right-radius : 0px;\n"
-"    background-color : black;\n"
-"    color : white;\n"
+"    border-radius : 0px;\n"
+"    background-color : lightgray;\n"
+"    color : black;\n"
 "}")
         self.VectorDataBaseTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.VectorDataBaseTitle.setObjectName("VectorDataBaseTitle")
@@ -734,11 +722,9 @@ class Ui_MainWindow(object):
         self.ModelDownloadingTitle = QtWidgets.QFrame(self.ModelDownloadingFrame)
         self.ModelDownloadingTitle.setGeometry(QtCore.QRect(0, 0, 241, 31))
         self.ModelDownloadingTitle.setStyleSheet("QFrame {\n"
-"    border-radius : 5px;\n"
-"    border-bottom-left-radius : 0px;\n"
-"    border-bottom-right-radius : 0px;\n"
-"    background-color : black;\n"
-"    color : white;\n"
+"    border-radius : 0px;\n"
+"    background-color : lightgray;\n"
+"    color : black;\n"
 "}")
         self.ModelDownloadingTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.ModelDownloadingTitle.setObjectName("ModelDownloadingTitle")
@@ -774,11 +760,9 @@ class Ui_MainWindow(object):
         self.LanguageTitle = QtWidgets.QFrame(self.LanguageFrame)
         self.LanguageTitle.setGeometry(QtCore.QRect(0, 0, 241, 31))
         self.LanguageTitle.setStyleSheet("QFrame {\n"
-"    border-radius : 5px;\n"
-"    border-bottom-left-radius : 0px;\n"
-"    border-bottom-right-radius : 0px;\n"
-"    background-color : black;\n"
-"    color : white;\n"
+"    border-radius : 0px;\n"
+"    background-color : lightgray;\n"
+"    color : black;\n"
 "}")
         self.LanguageTitle.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.LanguageTitle.setObjectName("LanguageTitle")

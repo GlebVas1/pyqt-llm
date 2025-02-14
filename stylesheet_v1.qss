@@ -1,0 +1,184 @@
+QMainWindow {
+	background-color: rgb(230, 230, 230);
+}
+
+QFrame {
+	border-radius : 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	background-color : rgb(240, 240, 240);
+}
+
+QTextEdit {
+	border-radius : 3px;
+	background-color : rgb(120, 120, 120);
+}
+
+QListView {
+	background-color: rgb(120, 120, 120);
+}
+
+QPushButton {
+	border-radius : 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	background-color : white;
+	text-align: center;
+}
+
+QPushButton:pressed {
+	border-radius : 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+    background-color: rgb(180, 180, 180);
+}
+
+QPushButton:hover {
+	border-radius : 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+    background-color: rgb(210, 210, 210);
+}
+
+QLabel {
+	border-width : 0px;
+}
+
+Line {
+	border-width : 0px;
+	color : black;
+}
+
+
+QSpinBox {
+	border-radius : 5px;
+	border: 1px solid black;
+	background-color : white; 
+	color : black;
+	padding-left : 15px;
+	padding-right : 15px;
+	max-height: 22px;
+	text-align: center;
+}
+
+QSpinBox QLineEdit {
+	text-align: center;
+}
+
+QSpinBox QAbstractSpinBox {
+	text-align: center;
+}
+
+QSpinBox::up-button {
+subcontrol-origin: border;
+subcontrol-position: center right; 
+border-image: url(:/icons/arrow-right.png);
+border-color: black;
+border : 1px;
+right : 5px;
+width : 5px;
+}
+
+QSpinBox::up-button::pressed {
+border-image: url(:/icons/arrow-right-pressed.png);
+}
+
+QSpinBox::down-button {
+subcontrol-origin: border;
+subcontrol-position: center left ;
+border-image: url(:/icons/arrow-left.png);
+border-color: black;
+border : 1px;
+left : 5px;
+width : 5px;
+}
+
+QSpinBox::down-button::pressed {
+border-image: url(:/icons/arrow-left-pressed.png);
+}
+
+QComboBox {
+	border-radius : 5px;
+	border : 1px solid black;
+	background-color : white;
+	color : black;
+	padding-right : 20px;
+	padding-left: 20px;
+}
+
+QComboBox::drop-down {
+    padding-right : 10px;
+	image: url(:/icons/arrow-down.png);
+	min-width: 25px;
+	min-height: 25px;
+}
+
+QComboBox::drop-down::pressed {
+    padding-right : 10px;
+	image: url(:/icons/arrow-down-pressed.png);
+	min-width: 25px;
+	min-height: 25px;
+}
+
+QComboBox QAbstractItemView {
+	color : black;
+    background-color : white;
+	border-radius : 5px;
+	border : 1px solid black;
+	outline : 0px;
+	selection-background-color: black;
+}
+
+QComboBox QAbstractItemView QScrollBar:vertical {
+  background-color: white;
+  color: black;
+}
+
+QComboBox QAbstractItemView QScrollBar::handle:vertical {
+  background-color: white;
+  border : 3px solid black;
+  border-radius : 5px;
+  color: black;
+  max-width : 5px;
+}
+
+QComboBox QAbstractItemView QScrollBar::add-page:vertical {
+    background: none;
+	height : 0px;
+}
+
+QComboBox QAbstractItemView QScrollBar::sub-page:vertical {
+    background: none;
+    height : 0px;
+}
+
+QComboBox QAbstractItemView QScrollBar::add-line:vertical {
+    background: none;
+	height : 0px;
+}
+
+QComboBox QAbstractItemView QScrollBar::sub-line:vertical {
+    background: none;
+    height : 0px;
+}
+
+QProgressBar {
+	color: white;
+     border: 1px solid black;
+     border-radius: 5px;
+ }
+
+ QProgressBar::chunk {
+     background-color: black;
+     width: 2px;
+ }
+
+QLineEdit {
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
