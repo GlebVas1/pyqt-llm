@@ -5,12 +5,14 @@ from PyQt5.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
 def StyleSheetByTypeOfTheMessage(type : int) -> str:
     if type == 0:
         return '''
+                border-radius : 7px;
                 background-color : rgb(250, 250, 250); \n
                 color : black;
                 border-color : rgb(230, 230, 230);
                 '''
     else:
         return '''
+                border-radius : 7px;
                 background-color : rgb(90, 90, 90); \n
                 color : white;
                 border-color : rgb(100, 100, 100);
@@ -67,10 +69,20 @@ class CustomDialogWidget(QtWidgets.QWidget):
         return QSize(self.width(), self.actualHeight)
     
     def Resize(self):
-        self.actualWidth = min(self.width(), self.actualWidth)
+        self.textField.document().adjustSize()
+        self.textField.updateGeometry()
+
+        self.actualHeight = int(self.textField.document().size().height()) + 20
+        self.actualWidth = max(int(self.textField.document().size().width()) + 20, self.width() // 2)
+
         self.textField.setMinimumWidth(self.actualWidth)
         self.textField.setMaximumWidth(self.actualWidth)
         self.setMinimumWidth(self.actualWidth)
 
         horizontalOffset = 0 if self.type == 1 else self.width() - self.actualWidth
         self.textField.setGeometry(QRect(horizontalOffset, 0, self.actualWidth, self.actualHeight))
+
+    def ChangeMessage(self, text : str):
+        self.textField.setMarkdown(text)
+        self.Resize()
+        

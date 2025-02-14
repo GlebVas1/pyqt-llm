@@ -1,9 +1,10 @@
-from huggingface_hub import hf_hub_download
+from huggingface_hub import hf_hub_download, snapshot_download
 from llama_cpp import Llama
 from langchain.vectorstores import Chroma
 from langchain.embeddings import LlamaCppEmbeddings
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 import numpy as np
 import faiss
 import os
@@ -39,6 +40,10 @@ class mainModel(Parameters):
     embedTextProcessFunctionStopFlag = False
     embedTextProcessFunctionFinish = None
 
+    textGenerationCallbackFunction = None
+    textGenerationFunctionStopFlag = False
+    textGenerationFunctionFinish = None
+
     def InitializeModel(self, name : str = "1") -> None:
         pass
 
@@ -70,7 +75,8 @@ class mainModel(Parameters):
             "max_tokens":2000,
             "stop":["</s>"],
             "echo":False, # Echo the prompt in the output
-            "top_k":1 # This is essentiallys greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
+            "top_k":1, # This is essentiallys greedy decoding, since the model will always return the highest-probability token. Set this value > 1 for sampling decoding
+            "stream":True
         }
 
     def SplitText(self, text, textDocumentName = "document", chunkSize : int = 600, chunkOverlap : int = 100) -> list[str]:
@@ -111,12 +117,15 @@ class mainModel(Parameters):
         
     
     def EmbedCycle(self) -> np.array:
+
         totalCount = len(self.splittedTextForIndex)
         valuePerStep = 1.0 / float(totalCount)
         currentProgress = 0.0
         textsEmbeds = []
+
         for text in self.splittedTextForIndex:
             if self.embedTextProcessFunctionStopFlag == True:
+
                 self.embedTextProcessFunctionStopFlag = False
 
                 if self.embedTextProcessFunctionProgress is not None:
@@ -255,17 +264,38 @@ class mainModel(Parameters):
         print("Answer ------")
 
 
-    def ComputeRequest(self, prompt : str) -> list[str]:
+    def ComputeRequest(self, prompt : str) -> None:
         """Returns all the text results from llm"""
         if self.llm is None:
             raise RuntimeError ("No answer model is setted")
         
-        result = self.llm(prompt=prompt, **self.generationKwargs)
-        resultsTexts = [choice["text"] for choice in result["choices"]]
-        return resultsTexts
+        output = self.llm.create_completion(prompt=prompt, **self.generationKwargs)
+        # output = self.llm(prompt=prompt, **self.generationKwargs)
+        
+        #resultsTexts = [choice["text"] for choice in result["choices"]]
+        result = ""
+
+        for out in output: 
+            if self.textGenerationFunctionStopFlag == True:
+
+                if self.textGenerationCallbackFunction is not None:
+                    self.textGenerationCallbackFunction(result)
+
+                if self.textGenerationFunctionFinish is not None:
+                    self.textGenerationFunctionFinish()
+
+                self.textGenerationFunctionStopFlag = False
+
+                return
+
+            print(out['choices'][0]['text'], end='\n')
+            result += out['choices'][0]['text']
+            if self.textGenerationCallbackFunction is not None:
+                self.textGenerationCallbackFunction(result)
+
 
     def mainModelSetContextFile(self, path : str) -> None:
         pass
 
-    def mainModelDownload(self, name : str) -> None:
-        pass
+    def DownloadModel(modelName : str = "intfloat/multilingual-e5-large-instruct") -> None:
+        filePath = snapshot_download(modelName, local_dir="./models/downloaded/" + modelName.split('/')[1], local_dir_use_symlinks=False, revision="main", tqdm_class=None)

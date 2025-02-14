@@ -17,9 +17,11 @@ import threading
 
 
 class Controller(mainui.Ui_MainWindow):
+
     LLMModel = model.mainModel()
     threadpool = QThreadPool()
     
+    allMesagesWidgets = []
 
     # https://stackoverflow.com/questions/25733142/qwidgetrepaint-recursive-repaint-detected-when-updating-progress-bar
     # https://stackoverflow.com/questions/45556440/pyqt-emit-signal-from-threading-thread
@@ -27,6 +29,11 @@ class Controller(mainui.Ui_MainWindow):
     embedButtonsSignal = pyqtSignal()
 
     embedThread = None
+
+
+    answerStringSignal = pyqtSignal(str)
+    answerButtonsSignal = pyqtSignal()
+
 
     def __init__(self):
         super().__init__()
@@ -122,9 +129,13 @@ class Controller(mainui.Ui_MainWindow):
         self.PresetComboBox.currentTextChanged.connect(self.LoadPreset)
         self.embedProgressSignal.connect(self.ChangeEmbedProgressBar)
         self.embedButtonsSignal.connect(self.ChangeVectorDataBaseProcessButtons)
+        
+        self.answerStringSignal.connect(self.AnswerCallbackFrom)
+        self.answerButtonsSignal.connect(self.ChangePromptButtons)
 
-
+        self.PromptStopPushButon.clicked.connect(self.StopAnswerThread)
         self.VectorDataBaseStopPushButton.setEnabled(False)
+        self.PromptStopPushButon.setEnabled(False)
     
     def InitializePresets(self):
         for name, pr in prs.presets.items():
@@ -166,6 +177,10 @@ class Controller(mainui.Ui_MainWindow):
         except RuntimeError as e:
             self.ShowMessageBox(str(e))
 
+    def ChangeMessage(self, ind : int, text : str):
+        self.allMesagesWidgets[ind].ChangeMessage(text)
+
+
     def AddToListViewMessages(self, message : str, type : int = 0):
         
         # type 1 = answer
@@ -185,6 +200,8 @@ class Controller(mainui.Ui_MainWindow):
 
         item.setSizeHint(messageOut.sizeHint())
 
+        self.allMesagesWidgets.append(messageOut)
+        
         #item.setTextAlignment(Qt.AlignmentFlag.AlignLeft if type == 1 else Qt.AlignmentFlag.AlignRight)
         
         self.DialogListWidget.addItem(item)
@@ -198,34 +215,54 @@ class Controller(mainui.Ui_MainWindow):
         #self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=1)
 
         #return
-        computedPrompt = "None"
-        try:
-            computedPrompt = self.LLMModel.ComputePrompt(self.PromptTextEdit.toPlainText(),
-                                                        preset=self.PresetTextEdit.toPlainText(),
-                                                        k=self.VectorDataBaseSearchKSpinBox.value(),
-                                                        extend=self.VectorDataBaseExtendSpinBox.value())
-        except Exception as e:
-            self.ShowMessageBox(str(e))
-            return
+
+        # computedPrompt = "None"
+        # try:
+        #     computedPrompt = self.LLMModel.ComputePrompt(self.PromptTextEdit.toPlainText(),
+        #                                                 preset=self.PresetTextEdit.toPlainText(),
+        #                                                 k=self.VectorDataBaseSearchKSpinBox.value(),
+        #                                                 extend=self.VectorDataBaseExtendSpinBox.value())
+        # except Exception as e:
+        #     self.ShowMessageBox(str(e))
+        #     return
         
+        # self.LLMModel.LoadGenerationKwargs(
+        #     maxTokens=self.GenerationSettingsMaxTokensSpinBox.value(),
+        #     topK=self.GenerationSettingsTopKSpinBox.value(),
+        #     echo=self.GenerationSettingsEchoCheckBox.isChecked()
+        # )
+        # result = None
+        self.LLMModel.textGenerationCallbackFunction = self.AnswerCallbackFromThread
+        self.LLMModel.textGenerationFunctionFinish = self.ChangePromptButtonsFromThread
         self.LLMModel.LoadGenerationKwargs(
             maxTokens=self.GenerationSettingsMaxTokensSpinBox.value(),
             topK=self.GenerationSettingsTopKSpinBox.value(),
             echo=self.GenerationSettingsEchoCheckBox.isChecked()
         )
-        result = None
+
+        self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=0)
+
+        computedPrompt = "What is red wine?"
+        self.AddToListViewMessages("", type=1)
+
         try: 
-            result = self.LLMModel.ComputeRequest(computedPrompt)
+            answerThread = threading.Thread(target=partial(self.LLMModel.ComputeRequest, computedPrompt))
+            answerThread.start()
             
         except Exception as e:
             self.ShowMessageBox(str(e))
-            return
 
-        self.AddToListViewMessages(self.PromptTextEdit.toPlainText(), type=0)
+        self.PromptSendPushButton.setEnabled(False)
+        self.PromptStopPushButon.setEnabled(True)
+
         self.PromptTextEdit.setText("")
-        self.AddToListViewMessages(result[0], type=1)
+        
 
+    def AnswerCallbackFromThread(self, str):
+        self.answerStringSignal.emit(str)
 
+    def AnswerCallbackFrom(self, str):
+        self.ChangeMessage(-1, str)
 
     def LoadTextFile(self):
         filePath = self.OpenFileDialog()
@@ -263,10 +300,11 @@ class Controller(mainui.Ui_MainWindow):
     def EmbedSplittedText(self):
         self.LLMModel.embedTextProcessFunctionProgress = self.ChangeEmbedProgressBarFromThread
         self.LLMModel.embedTextProcessFunctionFinish = self.ChangeVectorDataBaseProcessButtonsFromThread
-        
+
         try:
-           embedThread = threading.Thread(target=self.LLMModel.EmbedTexts, daemon=True)
+           embedThread = threading.Thread(target=self.LLMModel.EmbedTexts, daemon=False)
            embedThread.start()
+
         except Exception as e:
             self.ShowMessageBox(str(e))
             return
@@ -277,6 +315,17 @@ class Controller(mainui.Ui_MainWindow):
 
     def StopEmbedThread(self):
         self.LLMModel.embedTextProcessFunctionStopFlag = True
+
+    def StopAnswerThread(self):
+        self.LLMModel.textGenerationFunctionStopFlag = True
+
+    def ChangePromptButtons(self):
+        self.PromptSendPushButton.setEnabled(True)
+        self.PromptStopPushButon.setEnabled(False)
+
+    def ChangePromptButtonsFromThread(self):
+        self.answerButtonsSignal.emit()
+
 
 
 

@@ -193,7 +193,7 @@ QProgressBar {
  }
 
  QProgressBar::chunk {
-     background-color: black;
+     background-color: lightgray;
      width: 2px;
  }
 
