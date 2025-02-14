@@ -7,13 +7,13 @@ def StyleSheetByTypeOfTheMessage(type : int) -> str:
         return '''
                 background-color : rgb(250, 250, 250); \n
                 color : black;
-                border-color : black;
+                border-color : rgb(230, 230, 230);
                 '''
     else:
         return '''
                 background-color : rgb(90, 90, 90); \n
                 color : white;
-                border-color : white;
+                border-color : rgb(100, 100, 100);
                 '''
     
 
@@ -25,7 +25,7 @@ class CustomDialogWidget(QtWidgets.QWidget):
 
         font = QtGui.QFont()
         font.setPointSize(11)
-        font.setBold(True)
+        font.setBold(False)
         font.setWeight(75)
 
 
@@ -42,7 +42,7 @@ class CustomDialogWidget(QtWidgets.QWidget):
         print(self.textField.document().size().height())
 
         self.actualHeight = int(self.textField.document().size().height()) + 20
-        self.actualWidth = int(self.textField.document().size().width()) + 20
+        self.actualWidth = max(int(self.textField.document().size().width()) + 20, self.width() // 2)
 
         self.textField.setMinimumHeight(self.actualHeight)
         self.textField.setMaximumHeight(self.actualHeight)
@@ -54,6 +54,11 @@ class CustomDialogWidget(QtWidgets.QWidget):
         self.setMaximumHeight(self.actualHeight)
         self.setMinimumWidth(self.actualWidth)
 
+        effect = QGraphicsDropShadowEffect()
+        effect.setOffset(0, 0)
+        effect.setBlurRadius(15)
+        self.textField.setGraphicsEffect(effect)
+        
         self.type = type
 
         self.show()

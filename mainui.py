@@ -17,9 +17,12 @@ class Ui_MainWindow(object):
         MainWindow.resize(1920, 1058)
         MainWindow.setStyleSheet("QMainWindow {\n"
 "    background-color: rgb(230, 230, 230);\n"
+"\n"
 "}\n"
 "\n"
 "QFrame {\n"
+"    font: regular \"Segoe UI Semibold\";\n"
+"    font-size: 11pt;\n"
 "    border-radius : 5px;\n"
 "    border-style: solid;\n"
 "    border-width: 1px;\n"
@@ -29,6 +32,7 @@ class Ui_MainWindow(object):
 "\n"
 "QTextEdit {\n"
 "    border-radius : 3px;\n"
+"    color : white;\n"
 "    background-color : rgb(120, 120, 120);\n"
 "}\n"
 "\n"
@@ -199,6 +203,38 @@ class Ui_MainWindow(object):
 "    border: 1px solid lightgray;\n"
 "}\n"
 "\n"
+"QScrollBar:vertical {\n"
+"  background-color: rgb(120, 120, 120);\n"
+"  color: black;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background-color: lightgray;\n"
+"    border-radius : 5px;\n"
+"    border: 2px solid rgb(120, 120, 120);\n"
+"    color: red;\n"
+"    max-width : 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical {\n"
+"    background: none;\n"
+"    height : 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"    height : 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical {\n"
+"    background: none;\n"
+"    height : 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical {\n"
+"    background: none;\n"
+"    height : 0px;\n"
+"}\n"
 "")
         MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
@@ -233,10 +269,11 @@ class Ui_MainWindow(object):
         self.label_19 = QtWidgets.QLabel(self.LogoFrame)
         self.label_19.setGeometry(QtCore.QRect(30, 20, 181, 41))
         font = QtGui.QFont()
-        font.setPointSize(18)
-        font.setBold(True)
-        font.setItalic(True)
-        font.setWeight(75)
+        font.setFamily("Segoe UI Semibold")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_19.setFont(font)
         self.label_19.setObjectName("label_19")
         self.LeftFrameVerticalLayout.addWidget(self.LogoFrame)
@@ -257,13 +294,21 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.AnswerModelFrame)
         self.label_2.setGeometry(QtCore.QRect(10, 90, 111, 26))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.AnswerModelFrame)
         self.label_3.setGeometry(QtCore.QRect(10, 125, 111, 26))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.AnswerModelThreadsSpinBox = QtWidgets.QSpinBox(self.AnswerModelFrame)
@@ -275,7 +320,11 @@ class Ui_MainWindow(object):
         self.label_4 = QtWidgets.QLabel(self.AnswerModelFrame)
         self.label_4.setGeometry(QtCore.QRect(10, 160, 111, 26))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.AnswerModelGPULayersSpinBox = QtWidgets.QSpinBox(self.AnswerModelFrame)
@@ -303,9 +352,11 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.AnswerModelTitle)
         self.label.setGeometry(QtCore.QRect(10, -3, 141, 36))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.LeftFrameVerticalLayout.addWidget(self.AnswerModelFrame)
@@ -328,8 +379,11 @@ class Ui_MainWindow(object):
         self.label_22 = QtWidgets.QLabel(self.GenerationSettingsTitle)
         self.label_22.setGeometry(QtCore.QRect(5, -1, 181, 36))
         font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
+        font.setFamily("Segoe UI Semibold")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_22.setFont(font)
         self.label_22.setObjectName("label_22")
         self.GenerationSettingsEchoCheckBox = QtWidgets.QCheckBox(self.GenerationSettingsFrame)
@@ -369,30 +423,45 @@ class Ui_MainWindow(object):
         self.GenerationSettingsTopKSpinBox = QtWidgets.QSpinBox(self.GenerationSettingsFrame)
         self.GenerationSettingsTopKSpinBox.setGeometry(QtCore.QRect(145, 75, 81, 22))
         self.GenerationSettingsTopKSpinBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.GenerationSettingsTopKSpinBox.setMinimum(1)
+        self.GenerationSettingsTopKSpinBox.setMaximum(2)
+        self.GenerationSettingsTopKSpinBox.setSingleStep(1)
         self.GenerationSettingsTopKSpinBox.setObjectName("GenerationSettingsTopKSpinBox")
         self.label_5 = QtWidgets.QLabel(self.GenerationSettingsFrame)
         self.label_5.setGeometry(QtCore.QRect(10, 40, 111, 26))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.label_7 = QtWidgets.QLabel(self.GenerationSettingsFrame)
         self.label_7.setGeometry(QtCore.QRect(10, 110, 46, 21))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.GenerationSettingsMaxTokensSpinBox = QtWidgets.QSpinBox(self.GenerationSettingsFrame)
         self.GenerationSettingsMaxTokensSpinBox.setGeometry(QtCore.QRect(145, 40, 81, 22))
         self.GenerationSettingsMaxTokensSpinBox.setAlignment(QtCore.Qt.AlignCenter)
-        self.GenerationSettingsMaxTokensSpinBox.setMinimum(200)
+        self.GenerationSettingsMaxTokensSpinBox.setMinimum(1000)
         self.GenerationSettingsMaxTokensSpinBox.setMaximum(9999)
         self.GenerationSettingsMaxTokensSpinBox.setSingleStep(100)
         self.GenerationSettingsMaxTokensSpinBox.setObjectName("GenerationSettingsMaxTokensSpinBox")
         self.label_6 = QtWidgets.QLabel(self.GenerationSettingsFrame)
         self.label_6.setGeometry(QtCore.QRect(10, 75, 101, 26))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.GenerationSettingsTitle.raise_()
@@ -425,8 +494,11 @@ class Ui_MainWindow(object):
         self.label_8 = QtWidgets.QLabel(self.PresetTitle)
         self.label_8.setGeometry(QtCore.QRect(5, -1, 181, 31))
         font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
+        font.setFamily("Segoe UI Semibold")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
         self.gridLayout_4.addWidget(self.PresetTitle, 0, 0, 1, 1)
@@ -441,6 +513,13 @@ class Ui_MainWindow(object):
         spacerItem = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         self.PresetVerticalLayout.addItem(spacerItem)
         self.PresetTextEdit = QtWidgets.QTextEdit(self.PresetFrame)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.PresetTextEdit.setFont(font)
         self.PresetTextEdit.setObjectName("PresetTextEdit")
         self.PresetVerticalLayout.addWidget(self.PresetTextEdit)
         self.gridLayout_4.addLayout(self.PresetVerticalLayout, 1, 0, 1, 1)
@@ -468,6 +547,8 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setHorizontalSpacing(5)
         self.gridLayout_5.setObjectName("gridLayout_5")
         self.DialogListWidget = QtWidgets.QListWidget(self.DialogFrame)
+        self.DialogListWidget.setStyleSheet("")
+        self.DialogListWidget.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
         self.DialogListWidget.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         self.DialogListWidget.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         self.DialogListWidget.setObjectName("DialogListWidget")
@@ -578,9 +659,11 @@ class Ui_MainWindow(object):
         self.label_9 = QtWidgets.QLabel(self.TextProcessingTitle)
         self.label_9.setGeometry(QtCore.QRect(10, 0, 141, 31))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_9.setFont(font)
         self.label_9.setObjectName("label_9")
         self.verticalLayout_2.addWidget(self.TextProcessingFrame)
@@ -599,7 +682,11 @@ class Ui_MainWindow(object):
         self.label_13 = QtWidgets.QLabel(self.EmbeddingModelFrame)
         self.label_13.setGeometry(QtCore.QRect(10, 115, 111, 26))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_13.setFont(font)
         self.label_13.setObjectName("label_13")
         self.EmbeddingModelThreadsSpinBox = QtWidgets.QSpinBox(self.EmbeddingModelFrame)
@@ -612,7 +699,11 @@ class Ui_MainWindow(object):
         self.label_14 = QtWidgets.QLabel(self.EmbeddingModelFrame)
         self.label_14.setGeometry(QtCore.QRect(10, 80, 111, 26))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_14.setFont(font)
         self.label_14.setObjectName("label_14")
         self.EmbeddingModelGPULayersSpinBox = QtWidgets.QSpinBox(self.EmbeddingModelFrame)
@@ -623,7 +714,11 @@ class Ui_MainWindow(object):
         self.label_15 = QtWidgets.QLabel(self.EmbeddingModelFrame)
         self.label_15.setGeometry(QtCore.QRect(10, 150, 111, 26))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_15.setFont(font)
         self.label_15.setObjectName("label_15")
         self.EmbeddingModelComboBox = QtWidgets.QComboBox(self.EmbeddingModelFrame)
@@ -641,9 +736,11 @@ class Ui_MainWindow(object):
         self.label_12 = QtWidgets.QLabel(self.frame_13)
         self.label_12.setGeometry(QtCore.QRect(10, 0, 171, 31))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_12.setFont(font)
         self.label_12.setObjectName("label_12")
         self.EmbeddingModelLoadPushButton = QtWidgets.QPushButton(self.EmbeddingModelFrame)
@@ -675,7 +772,11 @@ class Ui_MainWindow(object):
         self.label_17 = QtWidgets.QLabel(self.VectorDataBaseFrame)
         self.label_17.setGeometry(QtCore.QRect(10, 161, 131, 21))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_17.setFont(font)
         self.label_17.setObjectName("label_17")
         self.VectorDataBaseSearchKSpinBox = QtWidgets.QSpinBox(self.VectorDataBaseFrame)
@@ -687,7 +788,11 @@ class Ui_MainWindow(object):
         self.label_18 = QtWidgets.QLabel(self.VectorDataBaseFrame)
         self.label_18.setGeometry(QtCore.QRect(10, 200, 131, 20))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_18.setFont(font)
         self.label_18.setObjectName("label_18")
         self.VectorDataBaseExtendSpinBox = QtWidgets.QSpinBox(self.VectorDataBaseFrame)
@@ -707,9 +812,11 @@ class Ui_MainWindow(object):
         self.label_16 = QtWidgets.QLabel(self.VectorDataBaseTitle)
         self.label_16.setGeometry(QtCore.QRect(10, 0, 171, 31))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_16.setFont(font)
         self.label_16.setObjectName("label_16")
         self.verticalLayout_2.addWidget(self.VectorDataBaseFrame)
@@ -731,9 +838,11 @@ class Ui_MainWindow(object):
         self.label_20 = QtWidgets.QLabel(self.ModelDownloadingTitle)
         self.label_20.setGeometry(QtCore.QRect(10, 0, 171, 31))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_20.setFont(font)
         self.label_20.setObjectName("label_20")
         self.ModelDownloadingLineEdit = QtWidgets.QLineEdit(self.ModelDownloadingFrame)
@@ -769,9 +878,11 @@ class Ui_MainWindow(object):
         self.label_21 = QtWidgets.QLabel(self.LanguageTitle)
         self.label_21.setGeometry(QtCore.QRect(10, 0, 171, 31))
         font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.label_21.setFont(font)
         self.label_21.setObjectName("label_21")
         self.LanguageComboBox = QtWidgets.QComboBox(self.LanguageFrame)

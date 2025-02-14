@@ -174,7 +174,7 @@ class mainModel(Parameters):
         except Exception as e:
             raise RuntimeError("Error while searching: " + str(e))
         
-    def ComputePrompt(self, question : str, k = 2, extend = 0) -> str:
+    def ComputePrompt(self, question : str, preset : str = "{0}",  k = 2, extend = 0) -> str:
         try:
             embededQuestion = self.EmbedQuestion(question)
         except Exception as e:
@@ -186,13 +186,7 @@ class mainModel(Parameters):
         except Exception as e: 
             raise RuntimeError("Error on search chunks " + str(e))
         
-        result = f'''Есть следующая информация
-                    ---------------------
-                    {chunks}
-                    ---------------------
-                    Ответь на вопрос используя только информацию выше
-                    Вопрос: {question}
-                    Ответ:'''
+        result = preset.format(question, chunks)
         
         return result
 
@@ -235,6 +229,9 @@ class mainModel(Parameters):
 
     def ComputeRequest(self, prompt : str) -> list[str]:
         """Returns all the text results from llm"""
+        if self.llm is None:
+            raise RuntimeError ("No answer model is setted")
+        
         result = self.llm(prompt=prompt, **self.generationKwargs)
         resultsTexts = [choice["text"] for choice in result["choices"]]
         return resultsTexts

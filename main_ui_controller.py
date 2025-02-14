@@ -9,6 +9,10 @@ from functools import partial
 
 from dialog_item import CustomDialogWidget
 
+import psutil as ps 
+
+import presets as prs
+
 class Controller(mainui.Ui_MainWindow):
     LLMModel = model.mainModel()
 
@@ -19,7 +23,13 @@ class Controller(mainui.Ui_MainWindow):
         self.InitializeComboBoxes()
         self.InitializeActions()
         self.InitializeChatField()
+        self.InitializeThreadsSpinBoxes()
+        self.InitializePresets()
         self.AddShadows()
+
+        os.environ["QT_ENABLE_HIGHDPI_SCALING"]   = "0"
+        os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "0"
+        os.environ["QT_SCALE_FACTOR"]             = "0"
 
     def AddShadows(self):
         frames = [self.AnswerModelFrame,
@@ -96,7 +106,28 @@ class Controller(mainui.Ui_MainWindow):
         self.PromptSendPushButton.clicked.connect(self.SendPrompt)
         self.TextProcessingLoadPushButton.clicked.connect(self.LoadTextFile)
         self.VectorDataBaseProcessPushButton.clicked.connect(self.EmbedSplittedText)
+
+        
+        self.PresetComboBox.currentTextChanged.connect(self.LoadPreset)
     
+    def InitializePresets(self):
+        for name, pr in prs.presets.items():
+            self.PresetComboBox.addItem(name)
+
+        self.PresetComboBox.setCurrentIndex(0)
+        self.PresetTextEdit.setText(prs.presets[self.PresetComboBox.currentText()])
+
+    def LoadPreset(self):
+        self.PresetTextEdit.setText(prs.presets[self.PresetComboBox.currentText()])
+    
+    def InitializeThreadsSpinBoxes(self):
+        self.AnswerModelThreadsSpinBox.setMaximum(ps.cpu_count())
+        self.EmbeddingModelThreadsSpinBox.setMaximum(ps.cpu_count())
+
+        self.AnswerModelThreadsSpinBox.setValue(ps.cpu_count() - 2)
+        self.EmbeddingModelThreadsSpinBox.setValue(ps.cpu_count() - 2)
+
+
     def LoadAnswerModelFromFile(self) -> None:
         try:
             self.LLMModel.LoadAnswerModelFromFile(
@@ -154,6 +185,7 @@ class Controller(mainui.Ui_MainWindow):
         computedPrompt = "None"
         try:
             computedPrompt = self.LLMModel.ComputePrompt(self.PromptTextEdit.toPlainText(),
+                                                        preset=self.PresetTextEdit.toPlainText(),
                                                         k=self.VectorDataBaseSearchKSpinBox.value(),
                                                         extend=self.VectorDataBaseExtendSpinBox.value())
         except Exception as e:

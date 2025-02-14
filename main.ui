@@ -16,9 +16,12 @@
   <property name="styleSheet">
    <string notr="true">QMainWindow {
 	background-color: rgb(230, 230, 230);
+
 }
 
 QFrame {
+	font: regular &quot;Segoe UI Semibold&quot;;
+    font-size: 11pt;
 	border-radius : 5px;
 	border-style: solid;
 	border-width: 1px;
@@ -28,6 +31,7 @@ QFrame {
 
 QTextEdit {
 	border-radius : 3px;
+	color : white;
 	background-color : rgb(120, 120, 120);
 }
 
@@ -198,6 +202,38 @@ QLineEdit {
 	border: 1px solid lightgray;
 }
 
+QScrollBar:vertical {
+  background-color: rgb(120, 120, 120);
+  color: black;
+}
+
+QScrollBar::handle:vertical {
+	background-color: lightgray;
+	border-radius : 5px;
+	border: 2px solid rgb(120, 120, 120);
+	color: red;
+	max-width : 5px;
+}
+
+QScrollBar::add-page:vertical {
+    background: none;
+	height : 0px;
+}
+
+QScrollBar::sub-page:vertical {
+    background: none;
+    height : 0px;
+}
+
+QScrollBar::add-line:vertical {
+    background: none;
+	height : 0px;
+}
+
+QScrollBar::sub-line:vertical {
+    background: none;
+    height : 0px;
+}
 </string>
   </property>
   <property name="toolButtonStyle">
@@ -285,11 +321,16 @@ QLineEdit {
               </property>
               <property name="font">
                <font>
-                <pointsize>18</pointsize>
-                <weight>75</weight>
-                <italic>true</italic>
-                <bold>true</bold>
+                <family>Segoe UI Semibold</family>
+                <pointsize>17</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: regular &quot;Segoe UI Semibold&quot;;
+    font-size: 17pt;</string>
               </property>
               <property name="text">
                <string>Simple RAG</string>
@@ -353,7 +394,11 @@ QLineEdit {
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -371,7 +416,11 @@ QLineEdit {
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -408,7 +457,11 @@ QLineEdit {
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -496,9 +549,11 @@ QLineEdit {
                </property>
                <property name="font">
                 <font>
+                 <family>Segoe UI Semibold</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -564,8 +619,11 @@ QLineEdit {
                </property>
                <property name="font">
                 <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>11</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -634,6 +692,15 @@ QCheckBox::indicator:checked:pressed {
               <property name="alignment">
                <set>Qt::AlignCenter</set>
               </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>2</number>
+              </property>
+              <property name="singleStep">
+               <number>1</number>
+              </property>
              </widget>
              <widget class="QLabel" name="label_5">
               <property name="geometry">
@@ -646,7 +713,11 @@ QCheckBox::indicator:checked:pressed {
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -664,7 +735,11 @@ QCheckBox::indicator:checked:pressed {
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -684,7 +759,7 @@ QCheckBox::indicator:checked:pressed {
                <set>Qt::AlignCenter</set>
               </property>
               <property name="minimum">
-               <number>200</number>
+               <number>1000</number>
               </property>
               <property name="maximum">
                <number>9999</number>
@@ -704,7 +779,11 @@ QCheckBox::indicator:checked:pressed {
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -785,8 +864,11 @@ QCheckBox::indicator:checked:pressed {
                  </property>
                  <property name="font">
                   <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
+                   <family>Segoe UI Semibold</family>
+                   <pointsize>11</pointsize>
+                   <weight>50</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
                   </font>
                  </property>
                  <property name="text">
@@ -842,7 +924,17 @@ QCheckBox::indicator:checked:pressed {
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QTextEdit" name="PresetTextEdit"/>
+                 <widget class="QTextEdit" name="PresetTextEdit">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                    <pointsize>11</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -938,6 +1030,12 @@ QCheckBox::indicator:checked:pressed {
              </property>
              <item row="0" column="0">
               <widget class="QListWidget" name="DialogListWidget">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::NoSelection</enum>
+               </property>
                <property name="verticalScrollMode">
                 <enum>QAbstractItemView::ScrollPerPixel</enum>
                </property>
@@ -1255,9 +1353,11 @@ QPushButton::pressed{
                </property>
                <property name="font">
                 <font>
+                 <family>Segoe UI Semibold</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -1317,7 +1417,11 @@ QPushButton::pressed{
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -1357,7 +1461,11 @@ QPushButton::pressed{
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -1391,7 +1499,11 @@ QPushButton::pressed{
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -1438,9 +1550,11 @@ QPushButton::pressed{
                </property>
                <property name="font">
                 <font>
+                 <family>Segoe UI Semibold</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -1559,7 +1673,11 @@ QPushButton::pressed{
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -1596,7 +1714,11 @@ QPushButton::pressed{
               </property>
               <property name="font">
                <font>
+                <family>Segoe UI Semibold</family>
                 <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="text">
@@ -1649,9 +1771,11 @@ QPushButton::pressed{
                </property>
                <property name="font">
                 <font>
+                 <family>Segoe UI Semibold</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -1711,9 +1835,11 @@ QPushButton::pressed{
                </property>
                <property name="font">
                 <font>
+                 <family>Segoe UI Semibold</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -1825,9 +1951,11 @@ QPushButton::pressed{
                </property>
                <property name="font">
                 <font>
+                 <family>Segoe UI Semibold</family>
                  <pointsize>11</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
