@@ -3,7 +3,7 @@ import model
 import os
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import Qt, QSize, QRunnable, QThreadPool, pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
 from functools import partial
 
@@ -13,9 +13,20 @@ import psutil as ps
 
 import presets as prs
 
+import threading
+
+
 class Controller(mainui.Ui_MainWindow):
     LLMModel = model.mainModel()
+    threadpool = QThreadPool()
+    
 
+    # https://stackoverflow.com/questions/25733142/qwidgetrepaint-recursive-repaint-detected-when-updating-progress-bar
+    # https://stackoverflow.com/questions/45556440/pyqt-emit-signal-from-threading-thread
+    embedProgressSignal = pyqtSignal(float)
+    embedButtonsSignal = pyqtSignal()
+
+    embedThread = None
 
     def __init__(self):
         super().__init__()
@@ -106,9 +117,14 @@ class Controller(mainui.Ui_MainWindow):
         self.PromptSendPushButton.clicked.connect(self.SendPrompt)
         self.TextProcessingLoadPushButton.clicked.connect(self.LoadTextFile)
         self.VectorDataBaseProcessPushButton.clicked.connect(self.EmbedSplittedText)
-
+        self.VectorDataBaseStopPushButton.clicked.connect(self.StopEmbedThread)
         
         self.PresetComboBox.currentTextChanged.connect(self.LoadPreset)
+        self.embedProgressSignal.connect(self.ChangeEmbedProgressBar)
+        self.embedButtonsSignal.connect(self.ChangeVectorDataBaseProcessButtons)
+
+
+        self.VectorDataBaseStopPushButton.setEnabled(False)
     
     def InitializePresets(self):
         for name, pr in prs.presets.items():
@@ -228,15 +244,39 @@ class Controller(mainui.Ui_MainWindow):
         
         print("File was splitted")
 
-    def ChangeEmbedProgressBar(self, value : float = 0.0):
+
+    def ChangeEmbedProgressBar(self, value : float):
         self.VectorDataBaseProgressBar.setValue(int(100.0 * value))
+        print("Val " + str(value))
+
+    def ChangeEmbedProgressBarFromThread(self, value : float = 0.0):
+        self.embedProgressSignal.emit(value)
+        
+    def ChangeVectorDataBaseProcessButtons(self):
+        self.VectorDataBaseProcessPushButton.setEnabled(True)
+        self.VectorDataBaseStopPushButton.setEnabled(False)
+
+
+    def ChangeVectorDataBaseProcessButtonsFromThread(self):
+        self.embedButtonsSignal.emit()
 
     def EmbedSplittedText(self):
-        self.LLMModel.splitTextProcessFunction = self.ChangeEmbedProgressBar
+        self.LLMModel.embedTextProcessFunctionProgress = self.ChangeEmbedProgressBarFromThread
+        self.LLMModel.embedTextProcessFunctionFinish = self.ChangeVectorDataBaseProcessButtonsFromThread
+        
         try:
-            self.LLMModel.EmbedTexts()
+           embedThread = threading.Thread(target=self.LLMModel.EmbedTexts, daemon=True)
+           embedThread.start()
         except Exception as e:
             self.ShowMessageBox(str(e))
+            return
+        
+        self.VectorDataBaseProcessPushButton.setEnabled(False)
+        self.VectorDataBaseStopPushButton.setEnabled(True)
+
+
+    def StopEmbedThread(self):
+        self.LLMModel.embedTextProcessFunctionStopFlag = True
 
 
 

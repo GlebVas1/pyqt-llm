@@ -8,6 +8,10 @@ import numpy as np
 import faiss
 import os
 
+import asyncio
+
+
+
 class PromptPatterns:
     languageDict = {}
 
@@ -31,9 +35,9 @@ class mainModel(Parameters):
 
     generationKwargs = None
 
-    splitTextProcessFunction = None
-
-
+    embedTextProcessFunctionProgress = None
+    embedTextProcessFunctionStopFlag = False
+    embedTextProcessFunctionFinish = None
 
     def InitializeModel(self, name : str = "1") -> None:
         pass
@@ -76,42 +80,66 @@ class mainModel(Parameters):
         return self.splittedTextForIndex
 
     def SetSplitTextsProcessFunction(self, func):
-        self.splitTextProcessFunction = func
+        self.embedTextProcessFunctionProgress = func
     
     def EmbedTexts(self) -> None:
-
+    
         if self.splittedTextForIndex is None:
             raise RuntimeError("No splitted text is setted")
 
         if self.llmEmbeding is None:
             raise RuntimeError("No embedding model is setted")
         
-        textsEmbeds = []
+        #asyncio.run(self.EmbedCycle)
+        textsEmbeds = self.EmbedCycle()
 
+        if textsEmbeds is None:
+            return
+        
+        d = textsEmbeds.shape[1]
+
+        if self.embedTextProcessFunctionProgress is not None:
+            self.embedTextProcessFunctionProgress(0.0)
+
+        if self.embedTextProcessFunctionFinish is not None:
+                    self.embedTextProcessFunctionFinish()
+
+        self.faissRAGIndex = faiss.IndexFlatL2(d)
+        self.faissRAGIndex.add(textsEmbeds)
+        return
+
+        
+    
+    def EmbedCycle(self) -> np.array:
         totalCount = len(self.splittedTextForIndex)
         valuePerStep = 1.0 / float(totalCount)
         currentProgress = 0.0
-
+        textsEmbeds = []
         for text in self.splittedTextForIndex:
-            
+            if self.embedTextProcessFunctionStopFlag == True:
+                self.embedTextProcessFunctionStopFlag = False
+
+                if self.embedTextProcessFunctionProgress is not None:
+                    self.embedTextProcessFunctionProgress(0.0)
+
+                if self.embedTextProcessFunctionFinish is not None:
+                    self.embedTextProcessFunctionFinish()
+                return
 
             # Because of embed queue sometimes incorrectly parse model results in it
             currentProgress += valuePerStep
 
-            if self.splitTextProcessFunction is not None:
-                self.splitTextProcessFunction(currentProgress)
+            if self.embedTextProcessFunctionProgress is not None:
+                self.embedTextProcessFunctionProgress(currentProgress)
             
             resultArray = self.llmEmbeding.client.embed(text)
             textsEmbeds.append(resultArray)
         
         textsEmbeds = np.array(textsEmbeds)
-
-        d = textsEmbeds.shape[1]
-
-        self.splitTextProcessFunction(0.0)
-
-        self.faissRAGIndex = faiss.IndexFlatL2(d)
-        self.faissRAGIndex.add(textsEmbeds)
+        self.embedTextProcessFunctionStopFlag = False
+        
+        return textsEmbeds
+    
 
     def SaveTextAndEmbededVectorStorage(self, path : str = "./vector_db/") -> None:
         if self.faissRAGIndex is None:
