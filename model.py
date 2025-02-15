@@ -11,6 +11,7 @@ import os
 
 import asyncio
 
+import json
 
 
 class PromptPatterns:
@@ -154,7 +155,7 @@ class mainModel(Parameters):
         if self.faissRAGIndex is None:
             raise RuntimeError("No index is setted")
         
-        path += self.textDocumentName + "_" + self.usedEmbeddingModel
+        path += '/' + self.textDocumentName + "_" + self.usedEmbeddingModel
 
         try:
             os.makedirs(path + "/index")
@@ -163,10 +164,7 @@ class mainModel(Parameters):
         except PermissionError:
             print("No permission to create save dir")
 
-
-        with open(path + "/index/index", "w"):
-            faiss.write_index(self.faissRAGIndex, path + "/index/index")
-
+        
         try:
             os.makedirs(path + "/text")
         except FileExistsError:
@@ -174,10 +172,26 @@ class mainModel(Parameters):
         except PermissionError:
             print("No permission to create save dir")
 
-        with open(path + "/text/data", "w") as file:
-            file.write(str(self.splittedTextForIndex))
-        
+        try:
+            with open(path + "/index/index", "w"):
+                faiss.write_index(self.faissRAGIndex, path + "/index/index")
+            with open(path + "/text/data", "w") as file:
+                file.write(json.dumps(self.splittedTextForIndex))
+                file.close()
 
+        except Exception as e:
+            raise RuntimeError("Error on saving vector data base " + str(e))
+
+        
+        
+    def LoadTextAndEmbededVectorStorage(self, path : str = "./vector_db/") -> None:
+        try:
+            self.faissRAGIndex = faiss.read_index(path + "/index/index")
+            with open(path + "/text/data", "r") as file:
+                self.splittedTextForIndex = json.loads(file.read())
+        
+        except Exception as e:
+            raise RuntimeError("Error on loading vector data base " + str(e))
 
     def EmbedQuestion(self, question : str) -> np.array:
         if self.llmEmbeding is not None:

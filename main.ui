@@ -98,7 +98,7 @@ subcontrol-origin: border;
 subcontrol-position: center right; 
 border-image: url(:/icons/arrow-right.png);
 border-color: black;
-border : 1px;
+border : 0px;
 right : 5px;
 width : 5px;
 }
@@ -112,7 +112,7 @@ subcontrol-origin: border;
 subcontrol-position: center left ;
 border-image: url(:/icons/arrow-left.png);
 border-color: black;
-border : 1px;
+border : 0px;
 left : 5px;
 width : 5px;
 }
@@ -1636,7 +1636,7 @@ QPushButton::pressed{
                <bool>false</bool>
               </property>
              </widget>
-             <widget class="QPushButton" name="VEctorDataBaseSavePushButton">
+             <widget class="QPushButton" name="VectorDataBaseSavePushButton">
               <property name="geometry">
                <rect>
                 <x>120</x>

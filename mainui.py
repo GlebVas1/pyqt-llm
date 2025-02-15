@@ -99,7 +99,7 @@ class Ui_MainWindow(object):
 "subcontrol-position: center right; \n"
 "border-image: url(:/icons/arrow-right.png);\n"
 "border-color: black;\n"
-"border : 1px;\n"
+"border : 0px;\n"
 "right : 5px;\n"
 "width : 5px;\n"
 "}\n"
@@ -113,7 +113,7 @@ class Ui_MainWindow(object):
 "subcontrol-position: center left ;\n"
 "border-image: url(:/icons/arrow-left.png);\n"
 "border-color: black;\n"
-"border : 1px;\n"
+"border : 0px;\n"
 "left : 5px;\n"
 "width : 5px;\n"
 "}\n"
@@ -194,7 +194,7 @@ class Ui_MainWindow(object):
 " }\n"
 "\n"
 " QProgressBar::chunk {\n"
-"     background-color: black;\n"
+"     background-color: lightgray;\n"
 "     width: 2px;\n"
 " }\n"
 "\n"
@@ -270,11 +270,13 @@ class Ui_MainWindow(object):
         self.label_19.setGeometry(QtCore.QRect(30, 20, 181, 41))
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semibold")
-        font.setPointSize(11)
+        font.setPointSize(17)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
         self.label_19.setFont(font)
+        self.label_19.setStyleSheet("font: regular \"Segoe UI Semibold\";\n"
+"    font-size: 17pt;")
         self.label_19.setObjectName("label_19")
         self.LeftFrameVerticalLayout.addWidget(self.LogoFrame)
         self.AnswerModelFrame = QtWidgets.QFrame(self.LeftFrame)
@@ -763,9 +765,9 @@ class Ui_MainWindow(object):
         self.VectorDataBaseProgressBar.setProperty("value", 13)
         self.VectorDataBaseProgressBar.setTextVisible(False)
         self.VectorDataBaseProgressBar.setObjectName("VectorDataBaseProgressBar")
-        self.VEctorDataBaseSavePushButton = QtWidgets.QPushButton(self.VectorDataBaseFrame)
-        self.VEctorDataBaseSavePushButton.setGeometry(QtCore.QRect(120, 120, 111, 26))
-        self.VEctorDataBaseSavePushButton.setObjectName("VEctorDataBaseSavePushButton")
+        self.VectorDataBaseSavePushButton = QtWidgets.QPushButton(self.VectorDataBaseFrame)
+        self.VectorDataBaseSavePushButton.setGeometry(QtCore.QRect(120, 120, 111, 26))
+        self.VectorDataBaseSavePushButton.setObjectName("VectorDataBaseSavePushButton")
         self.VectorDataBaseLoadPushButton = QtWidgets.QPushButton(self.VectorDataBaseFrame)
         self.VectorDataBaseLoadPushButton.setGeometry(QtCore.QRect(10, 120, 101, 26))
         self.VectorDataBaseLoadPushButton.setObjectName("VectorDataBaseLoadPushButton")
@@ -925,7 +927,7 @@ class Ui_MainWindow(object):
         self.EmbeddingModelLoadPushButton.setText(_translate("MainWindow", "Load"))
         self.VectorDataBaseStopPushButton.setText(_translate("MainWindow", "Stop"))
         self.VectorDataBaseProcessPushButton.setText(_translate("MainWindow", "Process"))
-        self.VEctorDataBaseSavePushButton.setText(_translate("MainWindow", "Save"))
+        self.VectorDataBaseSavePushButton.setText(_translate("MainWindow", "Save"))
         self.VectorDataBaseLoadPushButton.setText(_translate("MainWindow", "Load"))
         self.label_17.setText(_translate("MainWindow", "Search K"))
         self.label_18.setText(_translate("MainWindow", "Extend"))
