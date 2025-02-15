@@ -224,6 +224,7 @@ class mainModel(Parameters):
             raise RuntimeError("Error on search chunks " + str(e))
         
         result = preset.format(question, chunks)
+        print (result)
         
         return result
 
@@ -292,6 +293,11 @@ class mainModel(Parameters):
             result += out['choices'][0]['text']
             if self.textGenerationCallbackFunction is not None:
                 self.textGenerationCallbackFunction(result)
+        
+        if self.textGenerationFunctionFinish is not None:
+                    self.textGenerationFunctionFinish()
+                    
+            
 
 
     def mainModelSetContextFile(self, path : str) -> None:
