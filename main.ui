@@ -30,7 +30,8 @@ QFrame {
 }
 
 QTextEdit {
-	border-radius : 3px;
+	padding: 5px 5px 5px 5px;
+	border-radius : 5px;
 	color : white;
 	background-color : rgb(120, 120, 120);
 }
@@ -1630,7 +1631,7 @@ QPushButton::pressed{
                </rect>
               </property>
               <property name="value">
-               <number>13</number>
+               <number>0</number>
               </property>
               <property name="textVisible">
                <bool>false</bool>
@@ -1880,7 +1881,7 @@ QPushButton::pressed{
                </rect>
               </property>
               <property name="value">
-               <number>22</number>
+               <number>0</number>
               </property>
               <property name="textVisible">
                <bool>false</bool>

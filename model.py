@@ -9,8 +9,6 @@ import numpy as np
 import faiss
 import os
 
-import asyncio
-
 import json
 
 
@@ -44,9 +42,6 @@ class mainModel(Parameters):
     textGenerationCallbackFunction = None
     textGenerationFunctionStopFlag = False
     textGenerationFunctionFinish = None
-
-    def InitializeModel(self, name : str = "1") -> None:
-        pass
 
     def LoadEmbeddingModelFromFile(self, path : str = "./models/multilingual-e5-large-instruct_q8_0.gguf", nCtx=4000, nThreads=54, nGPULayers=0) -> None:
         try:
@@ -226,6 +221,7 @@ class mainModel(Parameters):
             raise RuntimeError("Error while searching: " + str(e))
         
     def ComputePrompt(self, question : str, preset : str = "{0}",  k = 2, extend = 0) -> str:
+        ''' Computte a prompt from preset and fill it with appropriate text chunks '''
         try:
             embededQuestion = self.EmbedQuestion(question)
         except Exception as e:
@@ -254,13 +250,7 @@ class mainModel(Parameters):
 
         retrieved_chunk = [self.splittedText[i] for i in I.tolist()[0]]
         
-        # request = f'''You are giving the following contest
-        #             ---------------------
-        #             {retrieved_chunk}
-        #             ---------------------
-        #             Answer the question using only the above provided information
-        #             Question: {question}
-        #             Answer:'''
+        # request = f
         
         request = f'''Есть следующая информация
                     ---------------------

@@ -26,9 +26,6 @@ import threading
 class Controller(mainui.Ui_MainWindow):
 
     LLMModel = model.mainModel()
-    
-    allMesagesWidgets = []
-    allMesagesItems = []
 
     # https://stackoverflow.com/questions/25733142/qwidgetrepaint-recursive-repaint-detected-when-updating-progress-bar
     # https://stackoverflow.com/questions/45556440/pyqt-emit-signal-from-threading-thread
@@ -44,7 +41,7 @@ class Controller(mainui.Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.InitializeComboBoxes()
-        self.InitializeActions()
+        self.InitializeConnectionsSlots()
         self.InitializeChatField()
         self.InitializeThreadsSpinBoxes()
         self.InitializePresets()
@@ -54,27 +51,8 @@ class Controller(mainui.Ui_MainWindow):
         os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "0"
         os.environ["QT_SCALE_FACTOR"]             = "0"
 
-    def AddShadows(self):
-        frames = [self.AnswerModelFrame,
-         self.DialogFrame,
-         self.EmbeddingModelFrame,
-         self.GenerationSettingsFrame,
-         self.LanguageFrame,
-         self.LogoFrame,
-         self.ModelDownloadingFrame,
-         self.PromptTextFrame, 
-         self.PresetFrame, 
-         self.TextProcessingFrame,
-         self.VectorDataBaseFrame
-        ]
-
-        for frame in frames:
-            effect = QGraphicsDropShadowEffect()
-            effect.setOffset(0, 0)
-            effect.setBlurRadius(15)
-            frame.setGraphicsEffect(effect)
-
-
+    '''Utils'''
+    
     def ShowMessageBox(self, text : str) -> None:
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
@@ -107,7 +85,30 @@ class Controller(mainui.Ui_MainWindow):
             selectedDir = file_dialog.selectedFiles()[0]
     
         return selectedDir
-        
+    
+    ''' Intialization and setup block'''
+
+    def AddShadows(self):
+        frames = [self.AnswerModelFrame,
+         self.DialogFrame,
+         self.EmbeddingModelFrame,
+         self.GenerationSettingsFrame,
+         self.LanguageFrame,
+         self.LogoFrame,
+         self.ModelDownloadingFrame,
+         self.PromptTextFrame, 
+         self.PresetFrame, 
+         self.TextProcessingFrame,
+         self.VectorDataBaseFrame
+        ]
+
+        for frame in frames:
+            effect = QGraphicsDropShadowEffect()
+            effect.setOffset(0, 0)
+            effect.setBlurRadius(15)
+            frame.setGraphicsEffect(effect)
+
+
     def InitializeChatField(self):
         self.DialogListWidget.setSpacing(10)
         self.DialogListWidget.setContentsMargins(5,5,5,5)
@@ -136,7 +137,7 @@ class Controller(mainui.Ui_MainWindow):
         answerModelsNames = os.listdir("./models/answer")
         self.AnswerModelComboBox.addItems(answerModelsNames)
 
-    def InitializeActions(self):
+    def InitializeConnectionsSlots(self):
         self.AnswerModelLoadPushButton.clicked.connect(self.LoadAnswerModelFromFile)
         self.EmbeddingModelLoadPushButton.clicked.connect(self.LoadEmbeddingModelFromFile)
         self.PromptSendPushButton.clicked.connect(self.SendPrompt)
@@ -155,11 +156,20 @@ class Controller(mainui.Ui_MainWindow):
         self.answerButtonsSignal.connect(self.ChangePromptButtons)
 
         self.PromptStopPushButon.clicked.connect(self.StopAnswerThread)
+        
+        self.errorMesageSignal.connect(self.ShowMessageBox)
+    
+    def SetUpButtons(self):
         self.VectorDataBaseStopPushButton.setEnabled(False)
         self.PromptStopPushButon.setEnabled(False)
 
-        self.errorMesageSignal.connect(self.ShowMessageBox)
-    
+    def InitializeThreadsSpinBoxes(self):
+        self.AnswerModelThreadsSpinBox.setMaximum(ps.cpu_count())
+        self.EmbeddingModelThreadsSpinBox.setMaximum(ps.cpu_count())
+
+        self.AnswerModelThreadsSpinBox.setValue(ps.cpu_count() - 2)
+        self.EmbeddingModelThreadsSpinBox.setValue(ps.cpu_count() - 2)
+
     def InitializePresets(self):
         for name, pr in prs.presets.items():
             self.PresetComboBox.addItem(name)
@@ -170,12 +180,7 @@ class Controller(mainui.Ui_MainWindow):
     def LoadPreset(self):
         self.PresetTextEdit.setText(prs.presets[self.PresetComboBox.currentText()])
     
-    def InitializeThreadsSpinBoxes(self):
-        self.AnswerModelThreadsSpinBox.setMaximum(ps.cpu_count())
-        self.EmbeddingModelThreadsSpinBox.setMaximum(ps.cpu_count())
-
-        self.AnswerModelThreadsSpinBox.setValue(ps.cpu_count() - 2)
-        self.EmbeddingModelThreadsSpinBox.setValue(ps.cpu_count() - 2)
+    ''' Loading models '''
 
     def LoadAnswerModelFromFile(self) -> None:
         try:
@@ -199,10 +204,10 @@ class Controller(mainui.Ui_MainWindow):
         except RuntimeError as e:
             self.ShowMessageBox(str(e))
 
-    def ChangeMessage(self, ind : int, text : str):
-        self.allMesagesWidgets[ind].ChangeMessage(text)
-        self.allMesagesItems[ind].setSizeHint(self.allMesagesWidgets[ind].sizeHint())
+    '''Chat functions'''
 
+    allMesagesWidgets = []
+    allMesagesItems = []
 
     def AddToListViewMessages(self, message : str, type : int = 0):
         
@@ -226,13 +231,18 @@ class Controller(mainui.Ui_MainWindow):
         self.allMesagesWidgets.append(messageOut)
         self.allMesagesItems.append(item)
         
-        #item.setTextAlignment(Qt.AlignmentFlag.AlignLeft if type == 1 else Qt.AlignmentFlag.AlignRight)
-        
         self.DialogListWidget.addItem(item)
         self.DialogListWidget.setItemWidget(item, messageOut)
         self.DialogListWidget.scrollToBottom()
         self.DialogListWidget.show()
-        
+    
+
+    def ChangeMessage(self, ind : int, text : str):
+        self.allMesagesWidgets[ind].ChangeMessage(text)
+        self.allMesagesItems[ind].setSizeHint(self.allMesagesWidgets[ind].sizeHint())
+
+
+    ''' Text file loading '''
     def LoadTextFile(self):
         filePath = self.OpenFileDialog()
         if filePath == "None":

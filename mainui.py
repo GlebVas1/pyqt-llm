@@ -31,7 +31,8 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QTextEdit {\n"
-"    border-radius : 3px;\n"
+"    padding: 5px 5px 5px 5px;\n"
+"    border-radius : 5px;\n"
 "    color : white;\n"
 "    background-color : rgb(120, 120, 120);\n"
 "}\n"
@@ -762,7 +763,7 @@ class Ui_MainWindow(object):
         self.VectorDataBaseProcessPushButton.setObjectName("VectorDataBaseProcessPushButton")
         self.VectorDataBaseProgressBar = QtWidgets.QProgressBar(self.VectorDataBaseFrame)
         self.VectorDataBaseProgressBar.setGeometry(QtCore.QRect(10, 80, 221, 26))
-        self.VectorDataBaseProgressBar.setProperty("value", 13)
+        self.VectorDataBaseProgressBar.setProperty("value", 0)
         self.VectorDataBaseProgressBar.setTextVisible(False)
         self.VectorDataBaseProgressBar.setObjectName("VectorDataBaseProgressBar")
         self.VectorDataBaseSavePushButton = QtWidgets.QPushButton(self.VectorDataBaseFrame)
@@ -855,7 +856,7 @@ class Ui_MainWindow(object):
         self.ModelDownloadingDownloadPushButton.setObjectName("ModelDownloadingDownloadPushButton")
         self.ModelDownloadingProgressBar = QtWidgets.QProgressBar(self.ModelDownloadingFrame)
         self.ModelDownloadingProgressBar.setGeometry(QtCore.QRect(10, 120, 216, 26))
-        self.ModelDownloadingProgressBar.setProperty("value", 22)
+        self.ModelDownloadingProgressBar.setProperty("value", 0)
         self.ModelDownloadingProgressBar.setTextVisible(False)
         self.ModelDownloadingProgressBar.setObjectName("ModelDownloadingProgressBar")
         self.ModelDownloadingStopPushButton = QtWidgets.QPushButton(self.ModelDownloadingFrame)
