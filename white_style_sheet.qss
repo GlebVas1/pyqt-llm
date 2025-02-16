@@ -1,0 +1,45 @@
+QMainWindow {
+	background-color: rgb(1, 150, 150);
+}
+
+QFrame {
+	border-radius : 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	background-color : rgb(240, 240, 240);
+}
+
+QTextEdit {
+	border-radius : 3px;
+	background-color : rgb(190, 190, 190);
+}
+
+QListView {
+	background-color: rgb(190, 190, 190);
+}
+
+QPushButton {
+	border-radius : 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	background-color : white;
+}
+
+QPushButton:pressed {
+	border-radius : 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+    background-color: rgb(180, 180, 180);
+}
+
+QLabel {
+	border-width : 0px;
+}
+
+Line {
+	border-width : 0px;
+	color : black;
+}

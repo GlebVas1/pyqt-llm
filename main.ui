@@ -1,0 +1,2006 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1920</width>
+    <height>1058</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+	background-color: rgb(230, 230, 230);
+
+}
+
+QFrame {
+	font: regular &quot;Segoe UI Semibold&quot;;
+    font-size: 11pt;
+	border-radius : 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: lightgray;
+	background-color : rgb(250, 250, 250);
+}
+
+QTextEdit {
+	padding: 5px 5px 5px 5px;
+	border-radius : 5px;
+	color : white;
+	background-color : rgb(120, 120, 120);
+}
+
+QListView {
+	background-color: rgb(120, 120, 120);
+}
+
+QPushButton {
+	border-radius : 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: lightgray;
+	background-color : white;
+	text-align: center;
+}
+
+QPushButton:pressed {
+	border-radius : 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: lightgray;
+    background-color: rgb(180, 180, 180);
+}
+
+QPushButton:hover {
+	border-radius : 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: lightgray;
+    background-color: rgb(210, 210, 210);
+}
+
+QLabel {
+	border-width : 0px;
+}
+
+Line {
+	border-width : 0px;
+	color : black;
+}
+
+
+QSpinBox {
+	border-radius : 5px;
+	border: 1px solid lightgray;
+	background-color : white; 
+	color : black;
+	padding-left : 15px;
+	padding-right : 15px;
+	max-height: 22px;
+	text-align: center;
+}
+
+QSpinBox QLineEdit {
+	text-align: center;
+}
+
+QSpinBox QAbstractSpinBox {
+	text-align: center;
+}
+
+QSpinBox::up-button {
+subcontrol-origin: border;
+subcontrol-position: center right; 
+border-image: url(:/icons/arrow-right.png);
+border-color: black;
+border : 0px;
+right : 5px;
+width : 5px;
+}
+
+QSpinBox::up-button::pressed {
+border-image: url(:/icons/arrow-right-pressed.png);
+}
+
+QSpinBox::down-button {
+subcontrol-origin: border;
+subcontrol-position: center left ;
+border-image: url(:/icons/arrow-left.png);
+border-color: black;
+border : 0px;
+left : 5px;
+width : 5px;
+}
+
+QSpinBox::down-button::pressed {
+border-image: url(:/icons/arrow-left-pressed.png);
+}
+
+QComboBox {
+	border-radius : 5px;
+	border : 1px solid lightgray;
+	background-color : white;
+	color : black;
+	padding-right : 20px;
+	padding-left: 20px;
+}
+
+QComboBox::drop-down {
+    padding-right : 10px;
+	image: url(:/icons/arrow-down.png);
+	min-width: 25px;
+	min-height: 25px;
+}
+
+QComboBox::drop-down::pressed {
+    padding-right : 10px;
+	image: url(:/icons/arrow-down-pressed.png);
+	min-width: 25px;
+	min-height: 25px;
+}
+
+QComboBox QAbstractItemView {
+	color : black;
+    background-color : white;
+	border-radius : 5px;
+	border : 1px solid lightgray;
+	outline : 0px;
+	selection-background-color: black;
+}
+
+QComboBox QAbstractItemView QScrollBar:vertical {
+  background-color: white;
+  color: black;
+}
+
+QComboBox QAbstractItemView QScrollBar::handle:vertical {
+  background-color: white;
+  border : 3px solid lightgray;
+  border-radius : 5px;
+  color: black;
+  max-width : 5px;
+}
+
+QComboBox QAbstractItemView QScrollBar::add-page:vertical {
+    background: none;
+	height : 0px;
+}
+
+QComboBox QAbstractItemView QScrollBar::sub-page:vertical {
+    background: none;
+    height : 0px;
+}
+
+QComboBox QAbstractItemView QScrollBar::add-line:vertical {
+    background: none;
+	height : 0px;
+}
+
+QComboBox QAbstractItemView QScrollBar::sub-line:vertical {
+    background: none;
+    height : 0px;
+}
+
+QProgressBar {
+	color: white;
+     border: 1px solid lightgray;
+     border-radius: 5px;
+ }
+
+ QProgressBar::chunk {
+     background-color: lightgray;
+     width: 2px;
+ }
+
+QLineEdit {
+	border-radius: 5px;
+	border: 1px solid lightgray;
+}
+
+QScrollBar:vertical {
+  background-color: rgb(120, 120, 120);
+  color: black;
+}
+
+QScrollBar::handle:vertical {
+	background-color: lightgray;
+	border-radius : 5px;
+	border: 2px solid rgb(120, 120, 120);
+	color: red;
+	max-width : 5px;
+}
+
+QScrollBar::add-page:vertical {
+    background: none;
+	height : 0px;
+}
+
+QScrollBar::sub-page:vertical {
+    background: none;
+    height : 0px;
+}
+
+QScrollBar::add-line:vertical {
+    background: none;
+	height : 0px;
+}
+
+QScrollBar::sub-line:vertical {
+    background: none;
+    height : 0px;
+}
+</string>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>3</number>
+    </property>
+    <property name="topMargin">
+     <number>3</number>
+    </property>
+    <property name="rightMargin">
+     <number>3</number>
+    </property>
+    <property name="bottomMargin">
+     <number>3</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>3</number>
+    </property>
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QFrame" name="LeftFrame">
+        <property name="minimumSize">
+         <size>
+          <width>260</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>260</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <layout class="QVBoxLayout" name="LeftFrameVerticalLayout">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="LogoFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QFrame {
+	background-color : black;
+	color : white;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <widget class="QLabel" name="label_19">
+              <property name="geometry">
+               <rect>
+                <x>30</x>
+                <y>20</y>
+                <width>181</width>
+                <height>41</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>17</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: regular &quot;Segoe UI Semibold&quot;;
+    font-size: 17pt;</string>
+              </property>
+              <property name="text">
+               <string>Simple RAG</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="AnswerModelFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>240</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>330</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <widget class="QSpinBox" name="AnswerModelContextTokensSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>150</x>
+                <y>90</y>
+                <width>81</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>500</number>
+              </property>
+              <property name="maximum">
+               <number>9000</number>
+              </property>
+              <property name="singleStep">
+               <number>500</number>
+              </property>
+              <property name="value">
+               <number>1000</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_2">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>90</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Context tokens</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_3">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>125</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Threads</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="AnswerModelThreadsSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>150</x>
+                <y>125</y>
+                <width>81</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>128</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_4">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>160</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>GPU Layers</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="AnswerModelGPULayersSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>150</x>
+                <y>160</y>
+                <width>81</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
+             <widget class="QComboBox" name="AnswerModelComboBox">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>221</width>
+                <height>31</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="AnswerModelLoadPushButton">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>200</y>
+                <width>221</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Load</string>
+              </property>
+             </widget>
+             <widget class="QFrame" name="AnswerModelTitle">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 0px;
+	background-color : lightgray;
+	color : black;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <widget class="QLabel" name="label">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>-3</y>
+                 <width>141</width>
+                 <height>36</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>11</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Answer model</string>
+               </property>
+              </widget>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="GenerationSettingsFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>140</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QFrame" name="GenerationSettingsTitle">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 0px;
+	background-color : lightgray;
+	color : black;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <widget class="QLabel" name="label_22">
+               <property name="geometry">
+                <rect>
+                 <x>5</x>
+                 <y>-1</y>
+                 <width>181</width>
+                 <height>36</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>11</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generation settings</string>
+               </property>
+              </widget>
+             </widget>
+             <widget class="QCheckBox" name="GenerationSettingsEchoCheckBox">
+              <property name="geometry">
+               <rect>
+                <x>55</x>
+                <y>110</y>
+                <width>21</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QCheckBox::indicator {
+    width: 20px;
+    height: 20px;
+}
+
+QCheckBox::indicator:unchecked {
+	image: url(:/icons/check-box-unchecked.png);
+}
+
+QCheckBox::indicator:unchecked:hover {
+    image: url(:/icons/check-box-unchecked-pressed.png);
+}
+
+QCheckBox::indicator:unchecked:pressed {
+    image: url(:/icons/check-box-unchecked-pressed.png);
+}
+
+QCheckBox::indicator:checked {
+    image: url(:/icons/check-box-checked.png);
+}
+
+QCheckBox::indicator:checked:hover {
+    image: url(:/icons/check-box-checked-pressed.png);
+}
+
+QCheckBox::indicator:checked:pressed {
+    image: url(:/icons/check-box-checked-pressed.png);
+}</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <property name="tristate">
+               <bool>false</bool>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="GenerationSettingsTopKSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>145</x>
+                <y>75</y>
+                <width>81</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>2</number>
+              </property>
+              <property name="singleStep">
+               <number>1</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_5">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Max tokens</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_7">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>110</y>
+                <width>46</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Echo</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="GenerationSettingsMaxTokensSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>145</x>
+                <y>40</y>
+                <width>81</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>1000</number>
+              </property>
+              <property name="maximum">
+               <number>9999</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_6">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>75</y>
+                <width>101</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Top K</string>
+              </property>
+             </widget>
+             <zorder>GenerationSettingsTitle</zorder>
+             <zorder>GenerationSettingsTopKSpinBox</zorder>
+             <zorder>label_5</zorder>
+             <zorder>label_7</zorder>
+             <zorder>GenerationSettingsMaxTokensSpinBox</zorder>
+             <zorder>label_6</zorder>
+             <zorder>GenerationSettingsEchoCheckBox</zorder>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="PresetFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>300</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_4">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <property name="horizontalSpacing">
+               <number>0</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>3</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QFrame" name="PresetTitle">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QFrame {
+	border-radius : 0px;
+	background-color : lightgray;
+	color : black;
+}</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::NoFrame</enum>
+                </property>
+                <widget class="QLabel" name="label_8">
+                 <property name="geometry">
+                  <rect>
+                   <x>5</x>
+                   <y>-1</y>
+                   <width>181</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Segoe UI Semibold</family>
+                   <pointsize>11</pointsize>
+                   <weight>50</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Preset</string>
+                 </property>
+                </widget>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <layout class="QVBoxLayout" name="PresetVerticalLayout">
+                <property name="leftMargin">
+                 <number>6</number>
+                </property>
+                <property name="topMargin">
+                 <number>6</number>
+                </property>
+                <property name="rightMargin">
+                 <number>6</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>6</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="PresetComboBox">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer_5">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Minimum</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>5</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QTextEdit" name="PresetTextEdit">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                    <pointsize>11</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0">
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>10</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="spacing">
+           <number>20</number>
+          </property>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QFrame" name="DialogFrame">
+            <property name="minimumSize">
+             <size>
+              <width>800</width>
+              <height>800</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>800</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <property name="leftMargin">
+              <number>5</number>
+             </property>
+             <property name="topMargin">
+              <number>5</number>
+             </property>
+             <property name="rightMargin">
+              <number>5</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
+             <property name="horizontalSpacing">
+              <number>5</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QListWidget" name="DialogListWidget">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::NoSelection</enum>
+               </property>
+               <property name="verticalScrollMode">
+                <enum>QAbstractItemView::ScrollPerPixel</enum>
+               </property>
+               <property name="horizontalScrollMode">
+                <enum>QAbstractItemView::ScrollPerPixel</enum>
+               </property>
+               <property name="spacing">
+                <number>20</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="PromptTextFrame">
+            <property name="minimumSize">
+             <size>
+              <width>800</width>
+              <height>145</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>1000</width>
+              <height>145</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <property name="leftMargin">
+              <number>5</number>
+             </property>
+             <property name="topMargin">
+              <number>5</number>
+             </property>
+             <property name="rightMargin">
+              <number>5</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
+             <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QTextEdit" name="PromptTextEdit"/>
+               </item>
+               <item>
+                <widget class="QFrame" name="PromptButtons">
+                 <property name="minimumSize">
+                  <size>
+                   <width>70</width>
+                   <height>130</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>130</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
+                 <widget class="QPushButton" name="PromptSendPushButton">
+                  <property name="geometry">
+                   <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>51</width>
+                    <height>51</height>
+                   </rect>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+	image: url(:/icons/send.png);
+	padding: 10px 10px 10px 10px;
+}
+
+QPushButton::pressed{
+	image: url(:/icons/send-pressed.png);
+	padding: 10px 10px 10px 10px;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                 <widget class="QPushButton" name="PromptStopPushButon">
+                  <property name="geometry">
+                   <rect>
+                    <x>10</x>
+                    <y>70</y>
+                    <width>51</width>
+                    <height>51</height>
+                   </rect>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+	image: url(:/icons/stop.png);
+	padding: 10px 10px 10px 10px;
+}
+
+QPushButton::pressed{
+	image: url(:/icons/stop-pressed.png);
+	padding: 10px 10px 10px 10px;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_2">
+        <property name="minimumSize">
+         <size>
+          <width>260</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>260</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="TextProcessingFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>150</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>150</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <widget class="QLabel" name="label_10">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>101</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Chunk size</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="TextProcessingChunkSizeSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>140</x>
+                <y>40</y>
+                <width>91</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>100</number>
+              </property>
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_11">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>75</y>
+                <width>101</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Chunk overlap</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="TextProcessingChunkOverlapSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>140</x>
+                <y>75</y>
+                <width>91</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>10</number>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="TextProcessingLoadPushButton">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>110</y>
+                <width>101</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Load</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="TextProcessingSaveButton">
+              <property name="geometry">
+               <rect>
+                <x>120</x>
+                <y>110</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+             <widget class="QFrame" name="TextProcessingTitle">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 0px;
+	background-color : lightgray;
+	color : black;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <widget class="QLabel" name="label_9">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>0</y>
+                 <width>141</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>11</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Text processing</string>
+               </property>
+              </widget>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="EmbeddingModelFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>220</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>220</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <widget class="QSpinBox" name="EmbeddingModelContextTokensSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>140</x>
+                <y>80</y>
+                <width>91</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>500</number>
+              </property>
+              <property name="maximum">
+               <number>9999</number>
+              </property>
+              <property name="singleStep">
+               <number>500</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_13">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>115</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Threads</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="EmbeddingModelThreadsSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>140</x>
+                <y>115</y>
+                <width>91</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>128</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_14">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>80</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Context tokens</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="EmbeddingModelGPULayersSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>140</x>
+                <y>150</y>
+                <width>91</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_15">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>150</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>GPU Layers</string>
+              </property>
+             </widget>
+             <widget class="QComboBox" name="EmbeddingModelComboBox">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>221</width>
+                <height>31</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QFrame" name="frame_13">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 0px;
+	background-color : lightgray;
+	color : black;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <widget class="QLabel" name="label_12">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>0</y>
+                 <width>171</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>11</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Embedding model</string>
+               </property>
+              </widget>
+             </widget>
+             <widget class="QPushButton" name="EmbeddingModelLoadPushButton">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>185</y>
+                <width>221</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Load</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="VectorDataBaseFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>235</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>235</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <widget class="QPushButton" name="VectorDataBaseStopPushButton">
+              <property name="geometry">
+               <rect>
+                <x>120</x>
+                <y>40</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Stop</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="VectorDataBaseProcessPushButton">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>101</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Process</string>
+              </property>
+             </widget>
+             <widget class="QProgressBar" name="VectorDataBaseProgressBar">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>80</y>
+                <width>221</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="textVisible">
+               <bool>false</bool>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="VectorDataBaseSavePushButton">
+              <property name="geometry">
+               <rect>
+                <x>120</x>
+                <y>120</y>
+                <width>111</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="VectorDataBaseLoadPushButton">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>120</y>
+                <width>101</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Load</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_17">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>161</y>
+                <width>131</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Search K</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="VectorDataBaseSearchKSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>140</x>
+                <y>160</y>
+                <width>91</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_18">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>200</y>
+                <width>131</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Extend</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="VectorDataBaseExtendSpinBox">
+              <property name="geometry">
+               <rect>
+                <x>140</x>
+                <y>200</y>
+                <width>91</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="maximum">
+               <number>5</number>
+              </property>
+             </widget>
+             <widget class="QFrame" name="VectorDataBaseTitle">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 0px;
+	background-color : lightgray;
+	color : black;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <widget class="QLabel" name="label_16">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>0</y>
+                 <width>171</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>11</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Vector data base</string>
+               </property>
+              </widget>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="ModelDownloadingFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>160</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>160</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QFrame" name="ModelDownloadingTitle">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 0px;
+	background-color : lightgray;
+	color : black;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <widget class="QLabel" name="label_20">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>0</y>
+                 <width>171</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>11</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Model downloading</string>
+               </property>
+              </widget>
+             </widget>
+             <widget class="QLineEdit" name="ModelDownloadingLineEdit">
+              <property name="geometry">
+               <rect>
+                <x>12</x>
+                <y>40</y>
+                <width>211</width>
+                <height>27</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="ModelDownloadingDownloadPushButton">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>80</y>
+                <width>101</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Download</string>
+              </property>
+             </widget>
+             <widget class="QProgressBar" name="ModelDownloadingProgressBar">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>120</y>
+                <width>216</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="textVisible">
+               <bool>false</bool>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="ModelDownloadingStopPushButton">
+              <property name="geometry">
+               <rect>
+                <x>125</x>
+                <y>80</y>
+                <width>101</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Stop</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="LanguageFrame">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QFrame" name="LanguageTitle">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>241</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame {
+	border-radius : 0px;
+	background-color : lightgray;
+	color : black;
+}</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <widget class="QLabel" name="label_21">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>0</y>
+                 <width>171</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>11</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Language</string>
+               </property>
+              </widget>
+             </widget>
+             <widget class="QComboBox" name="LanguageComboBox">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>221</width>
+                <height>31</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resources/ico_res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
