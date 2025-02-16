@@ -19,8 +19,8 @@
 Во время генерации к итоговому ответу дописываются токены по мере их поступления, так что область текста "динамически" расширяется
 Также поддерживается вывод в виде markdown
 
-![alt text](https://github.com/GlebVas1/pyqt-llm/blob/main/images/1.jpg?raw=true)
-![alt text](https://github.com/GlebVas1/pyqt-llm/blob/main/images/2.jpg?raw=true)
+![alt text](https://github.com/GlebVas1/pyqt-llm/blob/main/images/1.png?raw=true)
+![alt text](https://github.com/GlebVas1/pyqt-llm/blob/main/images/2.png?raw=true)
 
 # TODO:
     0. Добавить поддержку gpu
