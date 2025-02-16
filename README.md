@@ -3,8 +3,8 @@
 Часть моделей можно конвертировать в gguf формат, например как указано [тут](https://github.com/ggerganov/llama.cpp/discussions/2948).
 
 В качестве основных моделей использовались:
-[Для генерации ответов](https://huggingface.co/ruslandev/llama-3-8b-gpt-4o-ru1.0-gguf) (Хотя изначально планировалось рассматривать именно deepseek, но эта )
-[Для эмбеддинга](https://huggingface.co/intfloat/multilingual-e5-large-instruct) (Необходимо сконвертировать в gguf)
+   - [Для генерации ответов](https://huggingface.co/ruslandev/llama-3-8b-gpt-4o-ru1.0-gguf) (Хотя изначально планировалось рассматривать именно deepseek, но эта неплохо справлялась ещё и с русским языком)
+   - [Для эмбеддинга](https://huggingface.co/intfloat/multilingual-e5-large-instruct) (Необходимо сконвертировать в gguf)
 
 
 
